@@ -38,11 +38,20 @@ public class MikuBot {
     }
 
     private static void Mark(String arg) {
-        formattedOutput("mark");
+        // not error handling here pains me but we'll save that for a future commit
+        int index = Integer.parseInt(arg);
+        taskList.get(index).mark();
+
+        String output = "Omedetou! You've finished a task: \n       " + taskList.get(index);
+        formattedOutput(output);
     }
 
     private static void Unmark(String arg) {
-        formattedOutput("unmark");
+        int index = Integer.parseInt(arg);
+        taskList.get(index).unmark();
+
+        String output = "Aw man! You still haven't finished the task: \n       " + taskList.get(index);
+        formattedOutput(output);
     }
 
 
