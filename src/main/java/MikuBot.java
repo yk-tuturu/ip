@@ -1,7 +1,31 @@
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class MikuBot {
+    private static List<String> itemList = new ArrayList<>();
+    private static Map<String, Consumer<String>> functions = Map.of(
+            "bye", MikuBot::Exit,
+            "list", MikuBot::List
+    );
+    private static boolean terminate = false;
+
+    private static void Exit(String arg) {
+        formattedOutput("Bye! See you in the next sekai!");
+        terminate = true;
+    }
+
+    private static void Add(String arg) {
+        itemList.add(arg);
+    }
+
+    private static void List(String arg) {
+        // print list here
+    }
+
     private static void formattedOutput(String arg) {
         String output = "     ---------------------------------------\n" +
                 "     " + arg + "\n" +
