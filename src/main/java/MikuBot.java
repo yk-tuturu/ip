@@ -9,6 +9,7 @@ import java.lang.StringBuilder;
 public class MikuBot {
     private static List<Task> taskList = new ArrayList<>();
     private static Map<String, Consumer<String>> functions = Map.of(
+            "hello", MikuBot::Hello,
             "bye", MikuBot::Exit,
             "list", MikuBot::List,
             "mark", MikuBot::Mark,
@@ -18,6 +19,10 @@ public class MikuBot {
             "event", MikuBot::Event
     );
     private static boolean terminate = false;
+
+    private static void Hello(String arg) {
+        formattedOutput("Hello sekai!");
+    }
 
     private static void Exit(String arg) {
         formattedOutput("Bye! See you in the next sekai!");
