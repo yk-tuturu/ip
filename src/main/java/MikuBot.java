@@ -2,6 +2,13 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class MikuBot {
+    private static void formattedOutput(String arg) {
+        String output = "     ---------------------------------------\n" +
+                "     " + arg + "\n" +
+                "     --------------------------------------";
+        System.out.println(output);
+    }
+
     public static void main(String[] args) {
         String logo = "-------------------------------------------------------------\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣦⣶⣴⣤⣤⣖⣒⣲⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
@@ -45,11 +52,11 @@ public class MikuBot {
             String input = scanner.nextLine();
 
             if (input.equals("bye")) {
-                System.out.println("Bye! See you in the next sekai!");
+                formattedOutput("Bye! See you in the next sekai!");
                 break;
             }
 
-            System.out.println(input);
+            formattedOutput(input);
         }
     }
 }
