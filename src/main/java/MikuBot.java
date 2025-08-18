@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.lang.StringBuilder;
 
 public class MikuBot {
-    private static List<String> itemList = new ArrayList<>();
+    private static List<Task> taskList = new ArrayList<>();
     private static Map<String, Consumer<String>> functions = Map.of(
             "bye", MikuBot::Exit,
             "list", MikuBot::List
@@ -20,15 +20,16 @@ public class MikuBot {
     }
 
     private static void Add(String arg) {
-        itemList.add(arg);
-        formattedOutput(String.format("Miku has ahdded '%s' to the list!", arg));
+        Task task = new Task(arg);
+        taskList.add(task);
+        formattedOutput(String.format("Miku has added '%s' to the list!", arg));
     }
 
     private static void List(String arg) {
         // print list here
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < itemList.size(); i++) {
-            sb.append(String.format("%d. %s\n", i, itemList.get(i)));
+        for (int i = 0; i < taskList.size(); i++) {
+            sb.append(String.format("%d. %s\n", i, taskList.get(i)));
         }
 
         formattedOutput(sb.toString());
