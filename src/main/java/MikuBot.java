@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.lang.StringBuilder;
 
 public class MikuBot {
     private static List<String> itemList = new ArrayList<>();
@@ -20,17 +21,33 @@ public class MikuBot {
 
     private static void Add(String arg) {
         itemList.add(arg);
+        formattedOutput(String.format("Miku has ahdded '%s' to the list!", arg));
     }
 
     private static void List(String arg) {
         // print list here
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < itemList.size(); i++) {
+            sb.append(String.format("%d. %s\n", i, itemList.get(i)));
+        }
+
+        formattedOutput(sb.toString());
     }
 
     private static void formattedOutput(String arg) {
-        String output = "     ---------------------------------------\n" +
-                "     " + arg + "\n" +
-                "     --------------------------------------";
-        System.out.println(output);
+        String indent = "     ";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(indent).append("---------------------------------------\n");
+
+        String[] lines = arg.split("\\R");
+        for (String line : lines) {
+            sb.append(indent).append(line).append("\n");
+        }
+
+        sb.append(indent).append("---------------------------------------");
+
+        System.out.println(sb);
     }
 
     public static void main(String[] args) {
@@ -75,12 +92,16 @@ public class MikuBot {
         while (true) {
             String input = scanner.nextLine();
 
-            if (input.equals("bye")) {
-                formattedOutput("Bye! See you in the next sekai!");
-                break;
+            Consumer<String> action = functions.get(input);
+            if (action != null) {
+                action.accept(input);
+            } else {
+                Add(input);
             }
 
-            formattedOutput(input);
+            if (terminate) {
+                break;
+            }
         }
     }
 }
