@@ -31,7 +31,7 @@ public class MikuBot {
         // print list here
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
-            sb.append(String.format("%d. %s\n", i, taskList.get(i)));
+            sb.append(String.format("%d. %s\n", i + 1, taskList.get(i)));
         }
 
         formattedOutput(sb.toString());
@@ -39,7 +39,7 @@ public class MikuBot {
 
     private static void Mark(String arg) {
         // not error handling here pains me but we'll save that for a future commit
-        int index = Integer.parseInt(arg);
+        int index = Integer.parseInt(arg) - 1;
         taskList.get(index).mark();
 
         String output = "Omedetou! You've finished a task: \n       " + taskList.get(index);
@@ -47,7 +47,7 @@ public class MikuBot {
     }
 
     private static void Unmark(String arg) {
-        int index = Integer.parseInt(arg);
+        int index = Integer.parseInt(arg) - 1;
         taskList.get(index).unmark();
 
         String output = "Aw man! You still haven't finished the task: \n       " + taskList.get(index);
