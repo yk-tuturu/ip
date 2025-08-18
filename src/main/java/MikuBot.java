@@ -25,15 +25,64 @@ public class MikuBot {
     }
 
     private static void Todo(String arg) {
+        TodoTask task = new TodoTask(arg);
+        taskList.add(task);
 
+        formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
+                task, taskList.size(), taskList.size() > 1 ? "s" : ""));
     }
 
     private static void Deadline(String arg) {
+        String[] parts = arg.split("\\s+");
 
+        String value = "";
+        String deadline = "";
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < parts.length; i++) {
+            if (parts[i].equals("/by")) {
+                value = sb.toString().trim();
+                sb = new StringBuilder();
+            } else {
+                sb.append(parts[i]).append(" ");
+            }
+        }
+
+        deadline = sb.toString().trim();
+        DeadlineTask task = new DeadlineTask(value, deadline);
+        taskList.add(task);
+
+        formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
+                task, taskList.size(), taskList.size() > 1 ? "s" : ""));
     }
 
     private static void Event(String arg) {
+        String[] parts = arg.split("\\s+");
 
+        String value = "";
+        String from = "";
+        String to = "";
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < parts.length; i++) {
+            if (parts[i].equals("/from")) {
+                value = sb.toString().trim();
+                sb = new StringBuilder();
+            } else if (parts[i].equals("/to")) {
+                from = sb.toString().trim();
+                sb = new StringBuilder();
+            } else {
+                sb.append(parts[i]).append(" ");
+            }
+        }
+
+        to = sb.toString().trim();
+
+        EventTask task = new EventTask(value, from, to);
+        taskList.add(task);
+
+        formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
+                task, taskList.size(), taskList.size() > 1 ? "s" : ""));
     }
 
     private static void List(String arg) {
