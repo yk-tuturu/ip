@@ -12,7 +12,10 @@ public class MikuBot {
             "bye", MikuBot::Exit,
             "list", MikuBot::List,
             "mark", MikuBot::Mark,
-            "unmark", MikuBot::Unmark
+            "unmark", MikuBot::Unmark,
+            "todo", MikuBot::Todo,
+            "deadline", MikuBot::Deadline,
+            "event", MikuBot::Event
     );
     private static boolean terminate = false;
 
@@ -21,10 +24,16 @@ public class MikuBot {
         terminate = true;
     }
 
-    private static void Add(String arg) {
-        Task task = new Task(arg);
-        taskList.add(task);
-        formattedOutput(String.format("Miku has added '%s' to the list!", arg));
+    private static void Todo(String arg) {
+
+    }
+
+    private static void Deadline(String arg) {
+
+    }
+
+    private static void Event(String arg) {
+
     }
 
     private static void List(String arg) {
@@ -120,7 +129,7 @@ public class MikuBot {
             if (action != null) {
                 action.accept(argsPart);
             } else {
-                Add(input);
+                formattedOutput("Miku is lost! Miku doesn't know what to do! Miku can't see the end of the horizon!");
             }
 
             if (terminate) {
