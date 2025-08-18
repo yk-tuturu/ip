@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.util.function.Consumer;
+
 public class MikuBot {
     public static void main(String[] args) {
         String logo = "-------------------------------------------------------------\n" +
@@ -32,10 +35,21 @@ public class MikuBot {
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠿⠿⠿⠋⠸⣇⣠⣴⡿⠀⠀⠀\n" +
                 "--------------------------------------------------------------------------\n" +
                 "Hello, I'm MikuBot\n" +
-                "What can I do for you?\n" +
-                "--------------------------------------------------------------------------\n" +
-                "Bye. Hope to see you again soon!\n";
+                "Welcome to our sekai!\n" +
+                "--------------------------------------------------------------------------\n";
 
         System.out.println(logo);
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            String input = scanner.nextLine();
+
+            if (input.equals("bye")) {
+                System.out.println("Bye! See you in the next sekai!");
+                break;
+            }
+
+            System.out.println(input);
+        }
     }
 }
