@@ -10,7 +10,9 @@ public class MikuBot {
     private static List<Task> taskList = new ArrayList<>();
     private static Map<String, Consumer<String>> functions = Map.of(
             "bye", MikuBot::Exit,
-            "list", MikuBot::List
+            "list", MikuBot::List,
+            "mark", MikuBot::Mark,
+            "unmark", MikuBot::Unmark
     );
     private static boolean terminate = false;
 
@@ -34,6 +36,15 @@ public class MikuBot {
 
         formattedOutput(sb.toString());
     }
+
+    private static void Mark(String arg) {
+        formattedOutput("mark");
+    }
+
+    private static void Unmark(String arg) {
+        formattedOutput("unmark");
+    }
+
 
     private static void formattedOutput(String arg) {
         String indent = "     ";
@@ -92,10 +103,13 @@ public class MikuBot {
 
         while (true) {
             String input = scanner.nextLine();
+            String[] parts = input.split("\\s+", 2);
+            String command = parts[0].toLowerCase();
+            String argsPart = parts.length > 1 ? parts[1] : "";
 
-            Consumer<String> action = functions.get(input);
+            Consumer<String> action = functions.get(command);
             if (action != null) {
-                action.accept(input);
+                action.accept(argsPart);
             } else {
                 Add(input);
             }
