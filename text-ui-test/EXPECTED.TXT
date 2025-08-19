@@ -45,36 +45,30 @@ Welcome to our sekai!
      ---------------------------------------
      ---------------------------------------
      Miku has added this task to your list!
-         [T][ ] homework
+         [D][ ] 2103t (by: 9pm)
      You now have 2 tasks in your list
      ---------------------------------------
      ---------------------------------------
      Miku has added this task to your list!
-         [D][ ] 2103t (by: 9pm)
+         [D][ ] 2103t (by: sunday 9pm)
      You now have 3 tasks in your list
      ---------------------------------------
      ---------------------------------------
      Miku has added this task to your list!
-         [D][ ] 2103t (by: sunday 9pm)
+         [E][ ] party (from: 3pm to: 8pm)
      You now have 4 tasks in your list
      ---------------------------------------
      ---------------------------------------
      Miku has added this task to your list!
-         [E][ ] party (from: 3pm to: 8pm)
+         [E][ ] activity (from: monday 2pm to: monday 9pm)
      You now have 5 tasks in your list
      ---------------------------------------
      ---------------------------------------
-     Miku has added this task to your list!
-         [E][ ] activity (from: monday 2pm to: monday 9pm)
-     You now have 6 tasks in your list
-     ---------------------------------------
-     ---------------------------------------
      1. [T][ ] wipe floor
-     2. [T][ ] homework
-     3. [D][ ] 2103t (by: 9pm)
-     4. [D][ ] 2103t (by: sunday 9pm)
-     5. [E][ ] party (from: 3pm to: 8pm)
-     6. [E][ ] activity (from: monday 2pm to: monday 9pm)
+     2. [D][ ] 2103t (by: 9pm)
+     3. [D][ ] 2103t (by: sunday 9pm)
+     4. [E][ ] party (from: 3pm to: 8pm)
+     5. [E][ ] activity (from: monday 2pm to: monday 9pm)
      ---------------------------------------
      ---------------------------------------
      Omedetou! You've finished a task:
@@ -82,31 +76,85 @@ Welcome to our sekai!
      ---------------------------------------
      ---------------------------------------
      Omedetou! You've finished a task:
-            [D][x] 2103t (by: sunday 9pm)
+            [E][x] party (from: 3pm to: 8pm)
      ---------------------------------------
      ---------------------------------------
      1. [T][x] wipe floor
-     2. [T][ ] homework
-     3. [D][ ] 2103t (by: 9pm)
-     4. [D][x] 2103t (by: sunday 9pm)
-     5. [E][ ] party (from: 3pm to: 8pm)
-     6. [E][ ] activity (from: monday 2pm to: monday 9pm)
-     ---------------------------------------
-     ---------------------------------------
-     Aw man! You still haven't finished the task:
-            [D][ ] 2103t (by: 9pm)
+     2. [D][ ] 2103t (by: 9pm)
+     3. [D][ ] 2103t (by: sunday 9pm)
+     4. [E][x] party (from: 3pm to: 8pm)
+     5. [E][ ] activity (from: monday 2pm to: monday 9pm)
      ---------------------------------------
      ---------------------------------------
      Aw man! You still haven't finished the task:
             [D][ ] 2103t (by: sunday 9pm)
      ---------------------------------------
      ---------------------------------------
+     Aw man! You still haven't finished the task:
+            [E][ ] party (from: 3pm to: 8pm)
+     ---------------------------------------
+     ---------------------------------------
      1. [T][x] wipe floor
-     2. [T][ ] homework
-     3. [D][ ] 2103t (by: 9pm)
-     4. [D][ ] 2103t (by: sunday 9pm)
-     5. [E][ ] party (from: 3pm to: 8pm)
-     6. [E][ ] activity (from: monday 2pm to: monday 9pm)
+     2. [D][ ] 2103t (by: 9pm)
+     3. [D][ ] 2103t (by: sunday 9pm)
+     4. [E][ ] party (from: 3pm to: 8pm)
+     5. [E][ ] activity (from: monday 2pm to: monday 9pm)
+     ---------------------------------------
+     ---------------------------------------
+     Miku cannot add an empty task!
+         Usage: todo <task>
+     ---------------------------------------
+     ---------------------------------------
+     No deadline provided :(
+         Usage: deadline <task> /by <time>
+     ---------------------------------------
+     ---------------------------------------
+     Time range not provided :(
+         Usage: event <task> /from <time> /to <time>
+     ---------------------------------------
+     ---------------------------------------
+     Task description or deadline cannot be empty :(
+         Usage: deadline <task> /by <time>
+     ---------------------------------------
+     ---------------------------------------
+     Task description or deadline cannot be empty :(
+         Usage: deadline <task> /by <time>
+     ---------------------------------------
+     ---------------------------------------
+     Task description or deadline cannot be empty :(
+         Usage: deadline <task> /by <time>
+     ---------------------------------------
+     ---------------------------------------
+     Time range not provided :(
+         Usage: event <task> /from <time> /to <time>
+     ---------------------------------------
+     ---------------------------------------
+     Task description and time range cannot be empty :(
+         Usage: event <task> /from <time> /to <time>
+     ---------------------------------------
+     ---------------------------------------
+     Task description and time range cannot be empty :(
+         Usage: event <task> /from <time> /to <time>
+     ---------------------------------------
+     ---------------------------------------
+     Task description and time range cannot be empty :(
+         Usage: event <task> /from <time> /to <time>
+     ---------------------------------------
+     ---------------------------------------
+     Index provided is out of bounds :(
+         Usage: mark <index>
+     ---------------------------------------
+     ---------------------------------------
+     Index provided is out of bounds :(
+         Usage: unmark <index>
+     ---------------------------------------
+     ---------------------------------------
+     Index provided is out of bounds :(
+         Usage: mark <index>
+     ---------------------------------------
+     ---------------------------------------
+     Index provided is out of bounds :(
+         Usage: unmark <index>
      ---------------------------------------
      ---------------------------------------
      Bye! See you in the next sekai!

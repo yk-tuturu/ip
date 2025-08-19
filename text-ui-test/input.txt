@@ -1,7 +1,6 @@
 hello
 blah
 todo wipe floor
-todo homework
 deadline 2103t /by 9pm
 deadline 2103t /by sunday 9pm
 event party /from 3pm /to 8pm
@@ -13,4 +12,18 @@ list
 unmark 3
 unmark 4
 list
+todo
+deadline
+event
+deadline /by
+deadline /by 9pm
+deadline sdsds /by
+event
+event /from /to
+event dsdsd /from /to
+event sdsdsw /from ssdd /to
+mark 10
+unmark 10
+mark 0
+unmark 0
 bye
