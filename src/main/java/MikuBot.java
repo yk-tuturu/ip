@@ -7,118 +7,35 @@ import java.util.HashMap;
 import java.lang.StringBuilder;
 
 public class MikuBot {
-    private static List<Task> taskList = new ArrayList<>();
-    private static Map<String, Consumer<String>> functions = Map.of(
-            "hello", MikuBot::Hello,
-            "bye", MikuBot::Exit,
-            "list", MikuBot::List,
-            "mark", MikuBot::Mark,
-            "unmark", MikuBot::Unmark,
-            "todo", MikuBot::Todo,
-            "deadline", MikuBot::Deadline,
-            "event", MikuBot::Event
-    );
+    private static TaskList taskList = new TaskList();
+    private static CommandHandler commandHandler = new CommandHandler();
     private static boolean terminate = false;
 
-    private static void Hello(String arg) {
-        formattedOutput("Hello sekai!");
+    public static void AddTask(Task task) {
+        taskList.Add(task);
     }
 
-    private static void Exit(String arg) {
-        formattedOutput("Bye! See you in the next sekai!");
+    public static Task GetTask(int index) {
+        return taskList.Get(index);
+    }
+
+    public static void MarkTask(int index) {
+        taskList.MarkTask(index);
+    }
+
+    public static void UnmarkTask(int index) {
+        taskList.UnmarkTask(index);
+    }
+
+    public static int GetTaskLength() {
+        return taskList.GetLength();
+    }
+
+    public static void ToTerminate() {
         terminate = true;
     }
 
-    private static void Todo(String arg) {
-        TodoTask task = new TodoTask(arg);
-        taskList.add(task);
-
-        formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
-                task, taskList.size(), taskList.size() > 1 ? "s" : ""));
-    }
-
-    private static void Deadline(String arg) {
-        String[] parts = arg.split("\\s+");
-
-        String value = "";
-        String deadline = "";
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < parts.length; i++) {
-            if (parts[i].equals("/by")) {
-                value = sb.toString().trim();
-                sb = new StringBuilder();
-            } else {
-                sb.append(parts[i]).append(" ");
-            }
-        }
-
-        deadline = sb.toString().trim();
-        DeadlineTask task = new DeadlineTask(value, deadline);
-        taskList.add(task);
-
-        formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
-                task, taskList.size(), taskList.size() > 1 ? "s" : ""));
-    }
-
-    private static void Event(String arg) {
-        String[] parts = arg.split("\\s+");
-
-        String value = "";
-        String from = "";
-        String to = "";
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < parts.length; i++) {
-            if (parts[i].equals("/from")) {
-                value = sb.toString().trim();
-                sb = new StringBuilder();
-            } else if (parts[i].equals("/to")) {
-                from = sb.toString().trim();
-                sb = new StringBuilder();
-            } else {
-                sb.append(parts[i]).append(" ");
-            }
-        }
-
-        to = sb.toString().trim();
-
-        EventTask task = new EventTask(value, from, to);
-        taskList.add(task);
-
-        formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
-                task, taskList.size(), taskList.size() > 1 ? "s" : ""));
-    }
-
-    private static void List(String arg) {
-        // print list here
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, taskList.get(i)));
-        }
-
-        formattedOutput(sb.toString());
-    }
-
-    private static void Mark(String arg) {
-        // not error handling here pains me but we'll save that for a future commit
-        int index = Integer.parseInt(arg) - 1;
-        taskList.get(index).mark();
-
-        String output = "Omedetou! You've finished a task:\n       " + taskList.get(index);
-        formattedOutput(output);
-    }
-
-    private static void Unmark(String arg) {
-        int index = Integer.parseInt(arg) - 1;
-        taskList.get(index).unmark();
-
-        String output = "Aw man! You still haven't finished the task:\n       " + taskList.get(index);
-        formattedOutput(output);
-    }
-
-
-    private static void formattedOutput(String arg) {
+    public static void formattedOutput(String arg) {
         String indent = "     ";
         StringBuilder sb = new StringBuilder();
 
