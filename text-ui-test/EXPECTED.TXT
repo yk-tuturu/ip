@@ -157,5 +157,40 @@ Welcome to our sekai!
          Usage: unmark <index>
      ---------------------------------------
      ---------------------------------------
+     Parsing index number failed :(
+         Usage: mark <index>
+     ---------------------------------------
+     ---------------------------------------
+     Parsing index number failed :(
+         Usage: unmark <index>
+     ---------------------------------------
+     ---------------------------------------
+     Miku has deleted the task:
+         [T][x] wipe floor
+     Now you have 4 tasks remaining
+     ---------------------------------------
+     ---------------------------------------
+     1. [D][ ] 2103t (by: 9pm)
+     2. [D][ ] 2103t (by: sunday 9pm)
+     3. [E][ ] party (from: 3pm to: 8pm)
+     4. [E][ ] activity (from: monday 2pm to: monday 9pm)
+     ---------------------------------------
+     ---------------------------------------
+     Parsing index number failed :(
+         Usage: delete <index>
+     ---------------------------------------
+     ---------------------------------------
+     Parsing index number failed :(
+         Usage: delete <index>
+     ---------------------------------------
+     ---------------------------------------
+     Index provided is out of bounds :(
+         Usage: delete <index>
+     ---------------------------------------
+     ---------------------------------------
+     Index provided is out of bounds :(
+         Usage: delete <index>
+     ---------------------------------------
+     ---------------------------------------
      Bye! See you in the next sekai!
      ---------------------------------------
