@@ -43,6 +43,16 @@ public class MikuBot {
         return taskList.GetLength();
     }
 
+    public static Task DeleteTask(int index) throws IllegalCommandException {
+        if (index < 0 || index >= taskList.GetLength()) {
+            throw new IllegalCommandException("Index provided is out of bounds :(");
+        }
+
+        Task task = taskList.Get(index);
+        taskList.Delete(index);
+        return task;
+    }
+
     public static void ToTerminate() {
         terminate = true;
     }

@@ -11,7 +11,8 @@ public class CommandDefinitions {
         "unmark", new Command("unmark", CommandDefinitions::Unmark, "unmark <index>"),
         "todo", new Command("todo", CommandDefinitions::Todo, "todo <task>"),
         "deadline", new Command("deadline", CommandDefinitions::Deadline, "deadline <task> /by <time>"),
-        "event", new Command("event", CommandDefinitions::Event, "event <task> /from <time> /to <time>")
+        "event", new Command("event", CommandDefinitions::Event, "event <task> /from <time> /to <time>"),
+            "delete", new Command("delete", CommandDefinitions::Delete, "delete <index>")
     );
 
     private static void Hello(String arg) {
@@ -114,7 +115,7 @@ public class CommandDefinitions {
         int len = MikuBot.GetTaskLength();
 
         MikuBot.formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
-                task, len, len > 1 ? "s" : ""));
+                task, len, len != 1 ? "s" : ""));
     }
 
     private static void List(String arg) throws IllegalCommandException {
@@ -129,7 +130,13 @@ public class CommandDefinitions {
 
     private static void Mark(String arg) throws IllegalCommandException {
         // not error handling here pains me but we'll save that for a future commit
-        int index = Integer.parseInt(arg) - 1;
+        int index;
+        try {
+            index = Integer.parseInt(arg) - 1;
+        } catch (Exception e) {
+            throw new IllegalCommandException("Parsing index number failed :(");
+        }
+
         MikuBot.MarkTask(index);
 
         String output = "Omedetou! You've finished a task:\n       " + MikuBot.GetTask(index);
@@ -137,11 +144,33 @@ public class CommandDefinitions {
     }
 
     private static void Unmark(String arg) throws IllegalCommandException {
-        int index = Integer.parseInt(arg) - 1;
+        int index;
+        try {
+            index = Integer.parseInt(arg) - 1;
+        } catch (Exception e) {
+            throw new IllegalCommandException("Parsing index number failed :(");
+        }
+
         MikuBot.UnmarkTask(index);
 
         String output = "Aw man! You still haven't finished the task:\n       " + MikuBot.GetTask(index);
         MikuBot.formattedOutput(output);
+    }
+
+    private static void Delete(String arg) throws IllegalCommandException{
+        int index;
+        try {
+            index = Integer.parseInt(arg) - 1;
+        } catch (Exception e) {
+            throw new IllegalCommandException("Parsing index number failed :(");
+        }
+
+        Task task = MikuBot.DeleteTask(index);
+        int len = MikuBot.GetTaskLength();
+        String output = String.format("Miku has deleted the task:\n    %s\nNow you have %d task%s remaining",
+                task, len, len != 1 ? "s" : "");
+        MikuBot.formattedOutput(output);
+
     }
 
     static Map<String, Command> getCommands() {
