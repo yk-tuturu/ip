@@ -1,5 +1,3 @@
-import java.util.function.Consumer;
-
 public class Command {
     public String key;
     public CustomConsumer<String> function;

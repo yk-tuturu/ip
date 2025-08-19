@@ -1,18 +1,25 @@
-import java.util.function.Consumer;
 import java.util.Map;
-import java.util.HashMap;
 
 public class CommandDefinitions {
-    private static Map<String, Command> commandMap = Map.of(
-        "hello", new Command("hello", CommandDefinitions::Hello, "hello"),
-        "bye", new Command("bye", CommandDefinitions::Bye, "bye"),
-        "list", new Command("list", CommandDefinitions::List, "list"),
-        "mark", new Command("mark", CommandDefinitions::Mark, "mark <index>"),
-        "unmark", new Command("unmark", CommandDefinitions::Unmark, "unmark <index>"),
-        "todo", new Command("todo", CommandDefinitions::Todo, "todo <task>"),
-        "deadline", new Command("deadline", CommandDefinitions::Deadline, "deadline <task> /by <time>"),
-        "event", new Command("event", CommandDefinitions::Event, "event <task> /from <time> /to <time>"),
-            "delete", new Command("delete", CommandDefinitions::Delete, "delete <index>")
+    private static Map<String, Command> commandMap = Map.ofEntries(
+            Map.entry("hello", new Command("hello", CommandDefinitions::Hello, "hello")),
+            Map.entry("bye", new Command("bye", CommandDefinitions::Bye, "bye")),
+            Map.entry("list", new Command("list", CommandDefinitions::List, "list")),
+            Map.entry("mark", new Command("mark", CommandDefinitions::Mark, "mark <index>")),
+            Map.entry("unmark", new Command("unmark", CommandDefinitions::Unmark, "unmark <index>")),
+            Map.entry("todo", new Command("todo", CommandDefinitions::Todo, "todo <task>")),
+            Map.entry("deadline", new Command("deadline", CommandDefinitions::Deadline, "deadline <task> /by <time>")),
+            Map.entry("event", new Command("event", CommandDefinitions::Event, "event <task> /from <time> /to <time>")),
+            Map.entry("delete", new Command("delete", CommandDefinitions::Delete, "delete <index>")),
+            Map.entry("help", new Command("help", CommandDefinitions::Help, "help")),
+
+            // easter egg commands
+            Map.entry("sekai", new Command("sekai", CommandDefinitions::Sekai, "sekai")),
+            Map.entry("miku", new Command("miku", CommandDefinitions::Miku, "miku")),
+            Map.entry("rolling", new Command("rolling", CommandDefinitions::Rolling, "rolling")),
+            Map.entry("mesmerizer", new Command("mesmerizer", CommandDefinitions::Mesmerize, "mesmerizer")),
+            Map.entry("ghost", new Command("ghost", CommandDefinitions::Ghost, "ghost")),
+            Map.entry("disappear", new Command("disappear", CommandDefinitions::Disappear, "disappear"))
     );
 
     private static void Hello(String arg) {
@@ -22,6 +29,20 @@ public class CommandDefinitions {
     private static void Bye(String arg) {
         MikuBot.formattedOutput("Bye! See you in the next sekai!");
         MikuBot.ToTerminate();
+    }
+
+    private static void Help(String arg) {
+        String output = "hello: say hello to MikuBot!\n" +
+                "bye: say goodbye to MikuBot :(\n" +
+                "help: shows this command\n" +
+                "todo <task>: adds a todo task to your task list\n" +
+                "deadline <task> /by <time>: adds a deadline task to your task list\n" +
+                "event <task> /from <time> /to <time>: adds an event to your task list\n" +
+                "mark <index>: mark a task as done\n" +
+                "unmark <index>: mark a task as not done\n" +
+                "delete <index>: delete a task from the list\n" +
+                "list: shows all tasks\n";
+        MikuBot.formattedOutput(output);
     }
 
     private static void Todo(String arg) throws IllegalCommandException {
@@ -186,5 +207,31 @@ public class CommandDefinitions {
         }
 
         return c.usage;
+    }
+
+    // waow easter eggs
+    private static void Sekai(String arg) {
+        MikuBot.formattedOutput("Sekai de ichiban no hime sama~");
+    }
+
+    private static void Miku(String arg) {
+        MikuBot.formattedOutput("Miku miku ooooeeeoooo~");
+    }
+
+    private static void Rolling(String arg) {
+        MikuBot.formattedOutput("Mou ikkai~ mou ikkai~");
+    }
+
+    private static void Mesmerize(String arg) {
+        MikuBot.formattedOutput("FOCUS！→ ✷ ← FOCUS!");
+    }
+
+    private static void Ghost(String arg) {
+        MikuBot.formattedOutput("Mayday! Boku wo wakatte mo~ Mou dakishimenakutte ii nda yo~");
+    }
+
+    private static void Disappear(String arg) {
+        MikuBot.formattedOutput("--A critical error has occurred--\n--404 not found--");
+        MikuBot.ToTerminate();
     }
 }
