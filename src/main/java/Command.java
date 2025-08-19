@@ -14,4 +14,8 @@ public class Command {
     public String toString() {
         return usage;
     }
+
+    public void Run(String arg) {
+        function.accept(arg);
+    }
 }

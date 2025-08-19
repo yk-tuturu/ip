@@ -92,15 +92,10 @@ public class MikuBot {
 
         while (true) {
             String input = scanner.nextLine();
-            String[] parts = input.split("\\s+", 2);
-            String command = parts[0].toLowerCase();
-            String argsPart = parts.length > 1 ? parts[1] : "";
-
-            Consumer<String> action = functions.get(command);
-            if (action != null) {
-                action.accept(argsPart);
-            } else {
-                formattedOutput("Miku is lost! Miku doesn't know what to do! Miku can't see the end of the horizon!");
+            try {
+                commandHandler.ParseCommand(input);
+            } catch (UnrecognizedCommandException e) {
+                formattedOutput(e.getMessage());
             }
 
             if (terminate) {
