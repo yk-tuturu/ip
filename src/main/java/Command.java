@@ -2,10 +2,10 @@ import java.util.function.Consumer;
 
 public class Command {
     public String key;
-    public Consumer<String> function;
+    public CustomConsumer<String> function;
     public String usage;
 
-    public Command(String key, Consumer<String> function, String usage) {
+    public Command(String key, CustomConsumer<String> function, String usage) {
         this.key = key;
         this.function = function;
         this.usage = usage;
@@ -15,7 +15,7 @@ public class Command {
         return usage;
     }
 
-    public void Run(String arg) {
+    public void Run(String arg) throws IllegalCommandException{
         function.accept(arg);
     }
 }

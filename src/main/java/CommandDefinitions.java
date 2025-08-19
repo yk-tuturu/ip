@@ -3,6 +3,17 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class CommandDefinitions {
+    private static Map<String, Command> commandMap = Map.of(
+        "hello", new Command("hello", CommandDefinitions::Hello, "hello"),
+        "bye", new Command("bye", CommandDefinitions::Bye, "bye"),
+        "list", new Command("list", CommandDefinitions::List, "list"),
+        "mark", new Command("mark", CommandDefinitions::Mark, "mark <index>"),
+        "unmark", new Command("unmark", CommandDefinitions::Unmark, "unmark <index>"),
+        "todo", new Command("todo", CommandDefinitions::Todo, "todo <task>"),
+        "deadline", new Command("deadline", CommandDefinitions::Deadline, "deadline <task> /by <time>"),
+        "event", new Command("event", CommandDefinitions::Event, "event <task> /from <time> /to <time>")
+    );
+
     private static void Hello(String arg) {
         MikuBot.formattedOutput("Hello sekai!");
     }
@@ -12,7 +23,11 @@ public class CommandDefinitions {
         MikuBot.ToTerminate();
     }
 
-    private static void Todo(String arg) {
+    private static void Todo(String arg) throws IllegalCommandException {
+        if (arg.equals("")) {
+            throw new IllegalCommandException("Miku cannot add an empty task!");
+        }
+
         TodoTask task = new TodoTask(arg);
         MikuBot.AddTask(task);
 
@@ -22,23 +37,34 @@ public class CommandDefinitions {
                 task, len, len > 1 ? "s" : ""));
     }
 
-    private static void Deadline(String arg) {
+    private static void Deadline(String arg) throws IllegalCommandException {
         String[] parts = arg.split("\\s+");
 
         String value = "";
         String deadline = "";
+        boolean deadlineProvided = false;
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < parts.length; i++) {
             if (parts[i].equals("/by")) {
                 value = sb.toString().trim();
                 sb = new StringBuilder();
+                deadlineProvided = true;
             } else {
                 sb.append(parts[i]).append(" ");
             }
         }
 
         deadline = sb.toString().trim();
+
+        if (!deadlineProvided) {
+            throw new IllegalCommandException("No deadline provided :(");
+        }
+
+        if (value.isEmpty() || deadline.isEmpty()) {
+            throw new IllegalCommandException("Task description or deadline cannot be empty :(");
+        }
+
         DeadlineTask task = new DeadlineTask(value, deadline);
         MikuBot.AddTask(task);
 
@@ -48,27 +74,39 @@ public class CommandDefinitions {
                 task, len, len > 1 ? "s" : ""));
     }
 
-    private static void Event(String arg) {
+    private static void Event(String arg) throws IllegalCommandException {
         String[] parts = arg.split("\\s+");
 
         String value = "";
         String from = "";
         String to = "";
+        boolean fromProvided = false;
+        boolean toProvided = false;
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < parts.length; i++) {
             if (parts[i].equals("/from")) {
                 value = sb.toString().trim();
                 sb = new StringBuilder();
+                fromProvided = true;
             } else if (parts[i].equals("/to")) {
                 from = sb.toString().trim();
                 sb = new StringBuilder();
+                toProvided = true;
             } else {
                 sb.append(parts[i]).append(" ");
             }
         }
 
         to = sb.toString().trim();
+
+        if (!fromProvided || !toProvided) {
+            throw new IllegalCommandException("Time range not provided :(");
+        }
+
+        if (value.isEmpty() || from.isEmpty() || to.isEmpty()) {
+            throw new IllegalCommandException("Task description and time range cannot be empty :(");
+        }
 
         EventTask task = new EventTask(value, from, to);
         MikuBot.AddTask(task);
@@ -79,7 +117,7 @@ public class CommandDefinitions {
                 task, len, len > 1 ? "s" : ""));
     }
 
-    private static void List(String arg) {
+    private static void List(String arg) throws IllegalCommandException {
         // print list here
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < MikuBot.GetTaskLength(); i++) {
@@ -89,7 +127,7 @@ public class CommandDefinitions {
         MikuBot.formattedOutput(sb.toString());
     }
 
-    private static void Mark(String arg) {
+    private static void Mark(String arg) throws IllegalCommandException {
         // not error handling here pains me but we'll save that for a future commit
         int index = Integer.parseInt(arg) - 1;
         MikuBot.MarkTask(index);
@@ -98,7 +136,7 @@ public class CommandDefinitions {
         MikuBot.formattedOutput(output);
     }
 
-    private static void Unmark(String arg) {
+    private static void Unmark(String arg) throws IllegalCommandException {
         int index = Integer.parseInt(arg) - 1;
         MikuBot.UnmarkTask(index);
 
@@ -107,15 +145,17 @@ public class CommandDefinitions {
     }
 
     static Map<String, Command> getCommands() {
-        Map<String, Command> commands = new HashMap<>();
-        commands.put("hello", new Command("hello", CommandDefinitions::Hello, "hello"));
-        commands.put("bye", new Command("bye", CommandDefinitions::Bye, "bye"));
-        commands.put("list", new Command("list", CommandDefinitions::List, "list"));
-        commands.put("mark", new Command("mark", CommandDefinitions::Mark, "mark <index>"));
-        commands.put("unmark", new Command("unmark", CommandDefinitions::Unmark, "unmark <index>"));
-        commands.put("todo", new Command("todo", CommandDefinitions::Todo, "todo <task>"));
-        commands.put("deadline", new Command("deadline", CommandDefinitions::Deadline, "deadline <task> /by <time>"));
-        commands.put("event", new Command("event", CommandDefinitions::Event, "event <task> /from <time> /to <time>"));
-        return commands;
+        return commandMap;
+    }
+
+    static String getUsage(String key) {
+        Command c = commandMap.get(key);
+
+        // too lazy to throw an error i dgaf
+        if (c == null) {
+            return "";
+        }
+
+        return c.usage;
     }
 }

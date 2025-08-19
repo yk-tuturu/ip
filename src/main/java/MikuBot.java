@@ -15,15 +15,27 @@ public class MikuBot {
         taskList.Add(task);
     }
 
-    public static Task GetTask(int index) {
+    public static Task GetTask(int index) throws IllegalCommandException {
+        if (index < 0 || index >= taskList.GetLength()) {
+            throw new IllegalCommandException("Index provided is out of bounds :(");
+        }
+
         return taskList.Get(index);
     }
 
-    public static void MarkTask(int index) {
+    public static void MarkTask(int index) throws IllegalCommandException {
+        if (index < 0 || index >= taskList.GetLength()) {
+            throw new IllegalCommandException("Index provided is out of bounds :(");
+        }
+
         taskList.MarkTask(index);
     }
 
-    public static void UnmarkTask(int index) {
+    public static void UnmarkTask(int index) throws IllegalCommandException {
+        if (index < 0 || index >= taskList.GetLength()) {
+            throw new IllegalCommandException("Index provided is out of bounds :(");
+        }
+
         taskList.UnmarkTask(index);
     }
 
@@ -94,7 +106,7 @@ public class MikuBot {
             String input = scanner.nextLine();
             try {
                 commandHandler.ParseCommand(input);
-            } catch (UnrecognizedCommandException e) {
+            } catch (Exception e) {
                 formattedOutput(e.getMessage());
             }
 
