@@ -1,3 +1,16 @@
 hello
 blah
+todo wipe floor
+todo homework
+deadline 2103t /by 9pm
+deadline 2103t /by sunday 9pm
+event party /from 3pm /to 8pm
+event activity /from monday 2pm /to monday 9pm
+list
+mark 1
+mark 4
+list
+unmark 3
+unmark 4
+list
 bye

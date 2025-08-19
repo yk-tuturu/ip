@@ -39,5 +39,75 @@ Welcome to our sekai!
      Miku is lost! Miku doesn't know what to do! Miku can't see the end of the horizon!
      ---------------------------------------
      ---------------------------------------
+     Miku has added this task to your list!
+         [T][ ] wipe floor
+     You now have 1 task in your list
+     ---------------------------------------
+     ---------------------------------------
+     Miku has added this task to your list!
+         [T][ ] homework
+     You now have 2 tasks in your list
+     ---------------------------------------
+     ---------------------------------------
+     Miku has added this task to your list!
+         [D][ ] 2103t (by: 9pm)
+     You now have 3 tasks in your list
+     ---------------------------------------
+     ---------------------------------------
+     Miku has added this task to your list!
+         [D][ ] 2103t (by: sunday 9pm)
+     You now have 4 tasks in your list
+     ---------------------------------------
+     ---------------------------------------
+     Miku has added this task to your list!
+         [E][ ] party (from: 3pm to: 8pm)
+     You now have 5 tasks in your list
+     ---------------------------------------
+     ---------------------------------------
+     Miku has added this task to your list!
+         [E][ ] activity (from: monday 2pm to: monday 9pm)
+     You now have 6 tasks in your list
+     ---------------------------------------
+     ---------------------------------------
+     1. [T][ ] wipe floor
+     2. [T][ ] homework
+     3. [D][ ] 2103t (by: 9pm)
+     4. [D][ ] 2103t (by: sunday 9pm)
+     5. [E][ ] party (from: 3pm to: 8pm)
+     6. [E][ ] activity (from: monday 2pm to: monday 9pm)
+     ---------------------------------------
+     ---------------------------------------
+     Omedetou! You've finished a task:
+            [T][x] wipe floor
+     ---------------------------------------
+     ---------------------------------------
+     Omedetou! You've finished a task:
+            [D][x] 2103t (by: sunday 9pm)
+     ---------------------------------------
+     ---------------------------------------
+     1. [T][x] wipe floor
+     2. [T][ ] homework
+     3. [D][ ] 2103t (by: 9pm)
+     4. [D][x] 2103t (by: sunday 9pm)
+     5. [E][ ] party (from: 3pm to: 8pm)
+     6. [E][ ] activity (from: monday 2pm to: monday 9pm)
+     ---------------------------------------
+     ---------------------------------------
+     Aw man! You still haven't finished the task:
+            [D][ ] 2103t (by: 9pm)
+     ---------------------------------------
+     ---------------------------------------
+     Aw man! You still haven't finished the task:
+            [D][ ] 2103t (by: sunday 9pm)
+     ---------------------------------------
+     ---------------------------------------
+     1. [T][x] wipe floor
+     2. [T][ ] homework
+     3. [D][ ] 2103t (by: 9pm)
+     4. [D][ ] 2103t (by: sunday 9pm)
+     5. [E][ ] party (from: 3pm to: 8pm)
+     6. [E][ ] activity (from: monday 2pm to: monday 9pm)
+     ---------------------------------------
+     ---------------------------------------
      Bye! See you in the next sekai!
      ---------------------------------------

@@ -105,7 +105,7 @@ public class MikuBot {
         int index = Integer.parseInt(arg) - 1;
         taskList.get(index).mark();
 
-        String output = "Omedetou! You've finished a task: \n       " + taskList.get(index);
+        String output = "Omedetou! You've finished a task:\n       " + taskList.get(index);
         formattedOutput(output);
     }
 
@@ -113,7 +113,7 @@ public class MikuBot {
         int index = Integer.parseInt(arg) - 1;
         taskList.get(index).unmark();
 
-        String output = "Aw man! You still haven't finished the task: \n       " + taskList.get(index);
+        String output = "Aw man! You still haven't finished the task:\n       " + taskList.get(index);
         formattedOutput(output);
     }
 
