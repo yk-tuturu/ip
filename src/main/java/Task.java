@@ -11,6 +11,10 @@ public abstract class Task {
         return String.format("[%s] %s", done ? "x" : " ", value);
     }
 
+    public String getSaveString() {
+        return String.format("%d|%s", done ? 1 : 0, value);
+    }
+
     public void mark() {
         done = true;
     }

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
@@ -10,47 +11,10 @@ public class MikuBot {
     private static TaskList taskList = new TaskList();
     private static CommandHandler commandHandler = new CommandHandler();
     private static boolean terminate = false;
+    private static SaveDataManager saveData = new SaveDataManager();
 
-    public static void AddTask(Task task) {
-        taskList.Add(task);
-    }
-
-    public static Task GetTask(int index) throws IllegalCommandException {
-        if (index < 0 || index >= taskList.GetLength()) {
-            throw new IllegalCommandException("Index provided is out of bounds :(");
-        }
-
-        return taskList.Get(index);
-    }
-
-    public static void MarkTask(int index) throws IllegalCommandException {
-        if (index < 0 || index >= taskList.GetLength()) {
-            throw new IllegalCommandException("Index provided is out of bounds :(");
-        }
-
-        taskList.MarkTask(index);
-    }
-
-    public static void UnmarkTask(int index) throws IllegalCommandException {
-        if (index < 0 || index >= taskList.GetLength()) {
-            throw new IllegalCommandException("Index provided is out of bounds :(");
-        }
-
-        taskList.UnmarkTask(index);
-    }
-
-    public static int GetTaskLength() {
-        return taskList.GetLength();
-    }
-
-    public static Task DeleteTask(int index) throws IllegalCommandException {
-        if (index < 0 || index >= taskList.GetLength()) {
-            throw new IllegalCommandException("Index provided is out of bounds :(");
-        }
-
-        Task task = taskList.Get(index);
-        taskList.Delete(index);
-        return task;
+    public static TaskList GetTaskList() {
+        return taskList;
     }
 
     public static void ToTerminate() {
@@ -108,6 +72,13 @@ public class MikuBot {
                 "Hello, I'm MikuBot\n" +
                 "Welcome to our sekai!\n" +
                 "--------------------------------------------------------------------------";
+
+        try {
+            saveData.Init();
+        } catch (Exception e) {
+            formattedOutput("Miku can't initialize the save file!");
+            return;
+        }
 
         System.out.println(logo);
         Scanner scanner = new Scanner(System.in);

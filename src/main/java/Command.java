@@ -13,7 +13,7 @@ public class Command {
         return usage;
     }
 
-    public void Run(String arg) throws IllegalCommandException{
+    public void Run(String arg) throws Exception{
         function.accept(arg);
     }
 }

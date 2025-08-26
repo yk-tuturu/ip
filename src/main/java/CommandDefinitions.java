@@ -51,9 +51,9 @@ public class CommandDefinitions {
         }
 
         TodoTask task = new TodoTask(arg);
-        MikuBot.AddTask(task);
+        MikuBot.GetTaskList().Add(task);
 
-        int len = MikuBot.GetTaskLength();
+        int len = MikuBot.GetTaskList().GetLength();
 
         MikuBot.formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
                 task, len, len > 1 ? "s" : ""));
@@ -88,9 +88,10 @@ public class CommandDefinitions {
         }
 
         DeadlineTask task = new DeadlineTask(value, deadline);
-        MikuBot.AddTask(task);
+        TaskList tl = MikuBot.GetTaskList();
+        tl.Add(task);
 
-        int len = MikuBot.GetTaskLength();
+        int len = tl.GetLength();
 
         MikuBot.formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
                 task, len, len > 1 ? "s" : ""));
@@ -131,9 +132,11 @@ public class CommandDefinitions {
         }
 
         EventTask task = new EventTask(value, from, to);
-        MikuBot.AddTask(task);
+        TaskList tl = MikuBot.GetTaskList();
 
-        int len = MikuBot.GetTaskLength();
+        tl.Add(task);
+
+        int len = tl.GetLength();
 
         MikuBot.formattedOutput(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
                 task, len, len != 1 ? "s" : ""));
@@ -142,8 +145,10 @@ public class CommandDefinitions {
     private static void List(String arg) throws IllegalCommandException {
         // print list here
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < MikuBot.GetTaskLength(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, MikuBot.GetTask(i)));
+        TaskList tl = MikuBot.GetTaskList();
+
+        for (int i = 0; i < tl.GetLength(); i++) {
+            sb.append(String.format("%d. %s\n", i + 1, tl.Get(i)));
         }
 
         MikuBot.formattedOutput(sb.toString());
@@ -158,9 +163,15 @@ public class CommandDefinitions {
             throw new IllegalCommandException("Parsing index number failed :(");
         }
 
-        MikuBot.MarkTask(index);
+        TaskList tl = MikuBot.GetTaskList();
 
-        String output = "Omedetou! You've finished a task:\n       " + MikuBot.GetTask(index);
+        if (index < 0 || index >= tl.GetLength()) {
+            throw new IllegalCommandException("Index provided is out of bounds :(");
+        }
+
+        tl.MarkTask(index);
+
+        String output = "Omedetou! You've finished a task:\n       " + tl.Get(index);
         MikuBot.formattedOutput(output);
     }
 
@@ -172,9 +183,15 @@ public class CommandDefinitions {
             throw new IllegalCommandException("Parsing index number failed :(");
         }
 
-        MikuBot.UnmarkTask(index);
+        TaskList tl = MikuBot.GetTaskList();
 
-        String output = "Aw man! You still haven't finished the task:\n       " + MikuBot.GetTask(index);
+        if (index < 0 || index >= tl.GetLength()) {
+            throw new IllegalCommandException("Index provided is out of bounds :(");
+        }
+
+        tl.UnmarkTask(index);
+
+        String output = "Aw man! You still haven't finished the task:\n       " + tl.Get(index);
         MikuBot.formattedOutput(output);
     }
 
@@ -186,8 +203,14 @@ public class CommandDefinitions {
             throw new IllegalCommandException("Parsing index number failed :(");
         }
 
-        Task task = MikuBot.DeleteTask(index);
-        int len = MikuBot.GetTaskLength();
+        TaskList tl = MikuBot.GetTaskList();
+
+        if (index < 0 || index >= tl.GetLength()) {
+            throw new IllegalCommandException("Index provided is out of bounds :(");
+        }
+
+        Task task = tl.Delete(index);
+        int len = tl.GetLength();
         String output = String.format("Miku has deleted the task:\n    %s\nNow you have %d task%s remaining",
                 task, len, len != 1 ? "s" : "");
         MikuBot.formattedOutput(output);
