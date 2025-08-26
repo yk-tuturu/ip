@@ -6,6 +6,7 @@ import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.ui.UIHandler;
 
+import java.util.Map;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
@@ -59,15 +60,15 @@ public class MikuBot {
             String input = scanner.nextLine();
             try {
                 Command command = commandHandler.ParseCommand(input);
-                String args = commandHandler.GetArgs(input);
+                Map<String, String> args = commandHandler.GetArgs(input);
                 command.Run(args, taskList, saveData, ui);
+
+                if (command.toExit) {
+                    break;
+                }
 
             } catch (Exception e) {
                 formattedOutput(e.getMessage());
-            }
-
-            if (terminate) {
-                break;
             }
         }
     }

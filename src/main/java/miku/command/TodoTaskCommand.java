@@ -6,18 +6,20 @@ import miku.tasks.TaskList;
 import miku.tasks.TodoTask;
 import miku.ui.UIHandler;
 
+import java.util.Map;
+
 public class TodoTaskCommand extends Command {
     public TodoTaskCommand() {
         super("todo", "todo <task>");
     }
 
     @Override
-    public void Run(String arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
-        if (arg.isEmpty()) {
+    public void Run(Map<String, String> args, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+        if (args.get("default") == null) {
             throw new IllegalCommandException("Miku cannot add an empty task!");
         }
 
-        TodoTask task = new TodoTask(arg);
+        TodoTask task = new TodoTask(args.get("default"));
         tasks.Add(task);
 
         int len = tasks.GetLength();

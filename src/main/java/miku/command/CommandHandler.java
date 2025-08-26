@@ -12,6 +12,9 @@ public class CommandHandler {
     public CommandHandler() {
         commandMap.put("todo", new TodoTaskCommand());
         commandMap.put("list", new ListCommand());
+        commandMap.put("hello", new HelloCommand());
+        commandMap.put("bye", new ByeCommand());
+        commandMap.put("deadline", new DeadlineTaskCommand());
     }
 
     public Command ParseCommand(String input) throws UnrecognizedCommandException, IllegalCommandException {
@@ -27,12 +30,30 @@ public class CommandHandler {
         return command;
     }
 
-    // this will return a string later, but not today
-    public String GetArgs(String input) {
+    public Map<String, String> GetArgs(String input) {
         String[] parts = input.split("\\s+");
-        String key = parts[0].toLowerCase();
+        StringBuilder sb = new StringBuilder();
+        String keyword = "";
+        Map<String, String> result = new HashMap<>();
 
-        return parts.length > 1 ? parts[1] : "";
+        if (parts.length == 1) {
+            return result;
+        }
+
+        for (int i = 1; i < parts.length; i++) {
+            String part = parts[i];
+
+            if (part.charAt(0) == '/') {
+                result.put(keyword.isEmpty() ? "default" : keyword, sb.toString());
+                sb = new StringBuilder();
+                keyword = part.substring(1);
+            } else {
+                sb.append(" ").append(part);
+            }
+        }
+
+        result.put(keyword.isEmpty() ? "default" : keyword, sb.toString());
+        return result;
 
 
     }
