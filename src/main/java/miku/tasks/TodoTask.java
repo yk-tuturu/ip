@@ -1,3 +1,5 @@
+package miku.tasks;
+
 public class TodoTask extends Task {
     public TodoTask(String value) {
         super(value);

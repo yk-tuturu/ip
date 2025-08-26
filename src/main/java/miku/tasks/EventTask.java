@@ -1,3 +1,5 @@
+package miku.tasks;
+
 public class EventTask extends Task {
     public String from;
     public String to;

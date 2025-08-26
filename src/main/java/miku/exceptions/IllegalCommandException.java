@@ -1,3 +1,5 @@
+package miku.exceptions;
+
 public class IllegalCommandException  extends Exception {
     public IllegalCommandException() {
         super("Miku can't understand this command :(");
