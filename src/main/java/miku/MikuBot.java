@@ -2,6 +2,7 @@ package miku;
 
 import miku.command.Command;
 import miku.command.CommandHandler;
+import miku.exceptions.IllegalSaveException;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.ui.UIHandler;
@@ -21,22 +22,12 @@ public class MikuBot {
         commandHandler = new CommandHandler();
         saveData = new SaveDataManager();
         ui = new UIHandler();
-    }
 
-    public void formattedOutput(String arg) {
-        String indent = "     ";
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(indent).append("---------------------------------------\n");
-
-        String[] lines = arg.split("\\R");
-        for (String line : lines) {
-            sb.append(indent).append(line).append("\n");
+        try {
+            saveData.Init();
+        } catch (IllegalSaveException e) {
+            ui.Print(e.getMessage());
         }
-
-        sb.append(indent).append("---------------------------------------");
-
-        System.out.println(sb);
     }
 
     public void Run() {
@@ -62,7 +53,7 @@ public class MikuBot {
                 }
 
             } catch (Exception e) {
-                formattedOutput(e.getMessage());
+                ui.Print(e.getMessage());
             }
         }
     }

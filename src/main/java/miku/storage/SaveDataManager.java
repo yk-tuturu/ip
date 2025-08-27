@@ -13,24 +13,29 @@ public class SaveDataManager {
 
     private boolean isInit = false;
 
-    public void Init() throws IOException {
+    public void Init() throws IllegalSaveException {
         this.dir = new File("data");
         this.file = new File("data/save.txt");
 
         if (!dir.exists() || !dir.isDirectory()) {
             System.out.println("save dir doesnt exist");
+
             if (dir.mkdirs()) {  // mkdirs() also creates parent directories
                 System.out.println("Directory created: " + dir.getAbsolutePath());
             } else {
-                System.out.println("Failed to create directory"); // should throw error here
+                throw new IllegalSaveException();
             }
         }
 
         if (!file.exists()) {
-            if (file.createNewFile()) {
-                System.out.println("File created: " + file.getAbsolutePath());
-            } else {
-                System.out.println("Failed to create file");
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("File created: " + file.getAbsolutePath());
+                } else {
+                    System.out.println("Failed to create file");
+                }
+            } catch (IOException e) {
+                throw new IllegalSaveException();
             }
         }
 
@@ -40,7 +45,7 @@ public class SaveDataManager {
     public void Write(Task task) throws IllegalSaveException {
         String taskString = task.getSaveString();
 
-        try (FileWriter writer = new FileWriter("save.txt", true)) {
+        try (FileWriter writer = new FileWriter(file.getPath(), true)) {
             writer.write(taskString + "\n");
         } catch (IOException e) {
             throw new IllegalSaveException("Something went wrong in file write :(");

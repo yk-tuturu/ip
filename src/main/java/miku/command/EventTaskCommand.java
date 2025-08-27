@@ -1,6 +1,7 @@
 package miku.command;
 
 import miku.exceptions.IllegalCommandException;
+import miku.exceptions.IllegalSaveException;
 import miku.storage.SaveDataManager;
 import miku.tasks.DeadlineTask;
 import miku.tasks.EventTask;
@@ -30,6 +31,14 @@ public class EventTaskCommand extends Command {
         }
 
         Task task = new EventTask(arg.get("default"), arg.get("from"), arg.get("to"));
+        // tries to write to save file first, if fail abort the whole thing
+        try {
+            saveData.Write(task);
+        } catch (IllegalSaveException e) {
+            ui.Print(e.getMessage());
+            return;
+        }
+
         tasks.Add(task);
 
         int len = tasks.GetLength();

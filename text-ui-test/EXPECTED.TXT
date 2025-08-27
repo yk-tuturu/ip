@@ -29,7 +29,7 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢿⣮⣵⣮⣶⣝⣷⠭⠚⠃⠀⠀⠀⢸⣿⣿⣿⣿⣿⡆⠀⠀⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠿⠿⠿⠋⠸⣇⣠⣴⡿⠀⠀⠀
 --------------------------------------------------------------------------
-Hello, I'm miku.MikuBot
+Hello, I'm MikuBot
 Welcome to our sekai!
 --------------------------------------------------------------------------
      ---------------------------------------
@@ -113,15 +113,15 @@ Welcome to our sekai!
          Usage: event <task> /from <time> /to <time>
      ---------------------------------------
      ---------------------------------------
-     miku.tasks.Task description or deadline cannot be empty :(
+     Task description or deadline cannot be empty :(
          Usage: deadline <task> /by <time>
      ---------------------------------------
      ---------------------------------------
-     miku.tasks.Task description or deadline cannot be empty :(
+     Task description or deadline cannot be empty :(
          Usage: deadline <task> /by <time>
      ---------------------------------------
      ---------------------------------------
-     miku.tasks.Task description or deadline cannot be empty :(
+     Task description or deadline cannot be empty :(
          Usage: deadline <task> /by <time>
      ---------------------------------------
      ---------------------------------------
@@ -129,15 +129,15 @@ Welcome to our sekai!
          Usage: event <task> /from <time> /to <time>
      ---------------------------------------
      ---------------------------------------
-     miku.tasks.Task description and time range cannot be empty :(
+     Task description and time range cannot be empty :(
          Usage: event <task> /from <time> /to <time>
      ---------------------------------------
      ---------------------------------------
-     miku.tasks.Task description and time range cannot be empty :(
+     Task description and time range cannot be empty :(
          Usage: event <task> /from <time> /to <time>
      ---------------------------------------
      ---------------------------------------
-     miku.tasks.Task description and time range cannot be empty :(
+     Task description and time range cannot be empty :(
          Usage: event <task> /from <time> /to <time>
      ---------------------------------------
      ---------------------------------------
