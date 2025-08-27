@@ -9,6 +9,11 @@ public abstract class Task {
         this.done = false;
     }
 
+    public Task(String value, boolean done) {
+        this.value = value;
+        this.done = done;
+    }
+
     public String toString() {
         return String.format("[%s] %s", done ? "x" : " ", value);
     }

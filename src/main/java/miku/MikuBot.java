@@ -2,6 +2,7 @@ package miku;
 
 import miku.command.Command;
 import miku.command.CommandHandler;
+import miku.exceptions.FileIOError;
 import miku.exceptions.IllegalSaveException;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
@@ -9,7 +10,6 @@ import miku.ui.UIHandler;
 
 import java.util.Map;
 import java.util.Scanner;
-import java.lang.StringBuilder;
 
 public class MikuBot {
     private TaskList taskList;
@@ -25,7 +25,7 @@ public class MikuBot {
 
         try {
             saveData.Init();
-        } catch (IllegalSaveException e) {
+        } catch (FileIOError e) {
             ui.Print(e.getMessage());
         }
     }
@@ -36,9 +36,9 @@ public class MikuBot {
 
         try {
             saveData.Init();
-        } catch (Exception e) {
+            saveData.PopulateTasks(taskList);
+        } catch (FileIOError e) {
             ui.Print("Miku can't initialize the save file!");
-            return;
         }
 
         while (true) {

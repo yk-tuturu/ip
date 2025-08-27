@@ -37,5 +37,6 @@ public class DeleteTaskCommand extends Command {
         String output = String.format("Miku has deleted the task:\n    %s\nNow you have %d task%s remaining",
                 task, len, len != 1 ? "s" : "");
         ui.Print(output);
+        saveData.WriteListToFile(tasks);
     }
 }

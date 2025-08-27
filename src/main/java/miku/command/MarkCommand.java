@@ -36,5 +36,6 @@ public class MarkCommand extends Command {
 
         String output = "Omedetou! You've finished a task:\n       " + tasks.Get(index);
         ui.Print(output);
+        saveData.WriteListToFile(tasks);
     }
 }

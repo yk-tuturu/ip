@@ -1,7 +1,7 @@
 package miku.command;
 
 import miku.exceptions.IllegalCommandException;
-import miku.exceptions.IllegalSaveException;
+import miku.exceptions.FileIOError;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.ui.UIHandler;
@@ -29,5 +29,5 @@ public abstract class Command {
     }
 
     public abstract void Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui)
-            throws IllegalCommandException, IllegalSaveException;
+            throws IllegalCommandException, FileIOError;
 }

@@ -34,5 +34,6 @@ public class UnmarkCommand extends Command {
 
         String output = "Aw man! You still haven't finished the task:\n       " + tasks.Get(index);
         ui.Print(output);
+        saveData.WriteListToFile(tasks);
     }
 }

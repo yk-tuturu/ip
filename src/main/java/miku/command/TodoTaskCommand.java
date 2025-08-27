@@ -1,7 +1,7 @@
 package miku.command;
 
 import miku.exceptions.IllegalCommandException;
-import miku.exceptions.IllegalSaveException;
+import miku.exceptions.FileIOError;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.tasks.TodoTask;
@@ -26,7 +26,7 @@ public class TodoTaskCommand extends Command {
         // tries to write to save file first, if fail abort the whole thing
         try {
             saveData.Write(task);
-        } catch (IllegalSaveException e) {
+        } catch (FileIOError e) {
             ui.Print(e.getMessage());
             return;
         }
