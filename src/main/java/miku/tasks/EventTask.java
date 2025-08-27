@@ -1,16 +1,20 @@
 package miku.tasks;
 
-public class EventTask extends Task {
-    public String from;
-    public String to;
+import miku.util.DateTimeParser;
 
-    public EventTask(String value, String from, String to) {
+import java.time.LocalDateTime;
+
+public class EventTask extends Task {
+    public LocalDateTime from;
+    public LocalDateTime to;
+
+    public EventTask(String value, LocalDateTime from, LocalDateTime to) {
         super(value);
         this.from = from;
         this.to = to;
     }
 
-    public EventTask(String value, String from, String to, boolean done) {
+    public EventTask(String value, LocalDateTime from, LocalDateTime to, boolean done) {
         super(value, done);
         this.from = from;
         this.to = to;
@@ -18,11 +22,15 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), from, to);
+        String fromString = DateTimeParser.getDateString(from);
+        String toString = DateTimeParser.getDateString(to);
+        return String.format("[E]%s (from: %s to: %s)", super.toString(), fromString, toString);
     }
 
     @Override
     public String getSaveString() {
-        return "E|" + super.getSaveString() + "|" + from + "|" + to;
+        String fromString = DateTimeParser.getDateString(from);
+        String toString = DateTimeParser.getDateString(to);
+        return "E|" + super.getSaveString() + "|" + fromString + "|" + toString;
     }
 }

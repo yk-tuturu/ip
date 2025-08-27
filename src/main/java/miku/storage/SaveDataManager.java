@@ -1,8 +1,10 @@
 package miku.storage;
 
 import miku.exceptions.FileIOError;
+import miku.exceptions.IllegalCommandException;
 import miku.exceptions.IllegalSaveException;
 import miku.tasks.*;
+import miku.util.DateTimeParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -77,10 +79,11 @@ public class SaveDataManager {
                         task = new TodoTask(parts[2], parts[1].charAt(0) == '1');
                         break;
                     case 'D':
-                        task = new DeadlineTask(parts[2], parts[3], parts[1].charAt(0)=='1');
+                        task = new DeadlineTask(parts[2], DateTimeParser.parse(parts[3]), parts[1].charAt(0)=='1');
                         break;
                     case 'E':
-                        task = new EventTask(parts[2], parts[3], parts[4], parts[1].charAt(0)=='1');
+                        task = new EventTask(parts[2], DateTimeParser.parse(parts[3]),
+                                DateTimeParser.parse(parts[4]), parts[1].charAt(0)=='1');
                         break;
 
                     default:
@@ -93,6 +96,8 @@ public class SaveDataManager {
                 }
 
             } catch (IndexOutOfBoundsException e) {
+                needClean = true;
+            } catch (IllegalCommandException e) {
                 needClean = true;
             }
         }

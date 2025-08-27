@@ -7,7 +7,9 @@ import miku.tasks.EventTask;
 import miku.tasks.Task;
 import miku.tasks.TaskList;
 import miku.ui.UIHandler;
+import miku.util.DateTimeParser;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public class EventTaskCommand extends Command {
@@ -29,7 +31,17 @@ public class EventTaskCommand extends Command {
             throw new IllegalCommandException("Time range cannot be empty :(", this.usage);
         }
 
-        Task task = new EventTask(arg.get("default"), arg.get("from"), arg.get("to"));
+        LocalDateTime from;
+        LocalDateTime to;
+        try {
+            from = DateTimeParser.parse(arg.get("from"));
+            to = DateTimeParser.parse(arg.get("to"));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalCommandException("Date must be formatted correctly!");
+        }
+
+        Task task = new EventTask(arg.get("default"), from, to);
+
         // tries to write to save file first, if fail abort the whole thing
         try {
             saveData.Write(task);
