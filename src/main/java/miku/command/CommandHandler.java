@@ -15,6 +15,10 @@ public class CommandHandler {
         commandMap.put("hello", new HelloCommand());
         commandMap.put("bye", new ByeCommand());
         commandMap.put("deadline", new DeadlineTaskCommand());
+        commandMap.put("event", new EventTaskCommand());
+        commandMap.put("help", new HelpCommand());
+        commandMap.put("mark", new MarkCommand());
+        commandMap.put("unmark", new UnmarkCommand());
     }
 
     public Command ParseCommand(String input) throws UnrecognizedCommandException, IllegalCommandException {
@@ -44,15 +48,15 @@ public class CommandHandler {
             String part = parts[i];
 
             if (part.charAt(0) == '/') {
-                result.put(keyword.isEmpty() ? "default" : keyword, sb.toString());
+                result.put(keyword.isEmpty() ? "default" : keyword, sb.toString().trim());
                 sb = new StringBuilder();
                 keyword = part.substring(1);
             } else {
-                sb.append(" ").append(part);
+                sb.append(part).append(" ");
             }
         }
 
-        result.put(keyword.isEmpty() ? "default" : keyword, sb.toString());
+        result.put(keyword.isEmpty() ? "default" : keyword, sb.toString().trim());
         return result;
 
 

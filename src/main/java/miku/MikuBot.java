@@ -16,17 +16,11 @@ public class MikuBot {
     private SaveDataManager saveData;
     private UIHandler ui;
 
-    private boolean terminate = false;
-
     public MikuBot() {
         taskList = new TaskList();
         commandHandler = new CommandHandler();
         saveData = new SaveDataManager();
         ui = new UIHandler();
-    }
-
-    public void ToTerminate() {
-        terminate = true;
     }
 
     public void formattedOutput(String arg) {
@@ -72,8 +66,6 @@ public class MikuBot {
             }
         }
     }
-
-
 
     public static void main(String[] args) {
         MikuBot bot = new MikuBot();
