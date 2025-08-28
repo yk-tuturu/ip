@@ -30,6 +30,11 @@ public class MikuBot {
         }
     }
 
+    // for running junit tests
+    public void RunCommand(String input) {
+        
+    }
+
     public void Run() {
         ui.PrintIntro();
         Scanner scanner = new Scanner(System.in);
