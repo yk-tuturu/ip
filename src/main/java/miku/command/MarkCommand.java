@@ -6,6 +6,7 @@ import miku.tasks.DeadlineTask;
 import miku.tasks.Task;
 import miku.tasks.TaskList;
 import miku.ui.UIHandler;
+import miku.util.Constants;
 
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         // not error handling here pains me but we'll save that for a future commit
         if (!arg.containsKey("default")) {
             throw new IllegalCommandException("Parsing index number failed :(");
@@ -34,8 +35,10 @@ public class MarkCommand extends Command {
 
         tasks.MarkTask(index);
 
-        String output = "Omedetou! You've finished a task:\n       " + tasks.Get(index);
-        ui.Print(output);
+        String output = "Omedetou! You've finished a task:\n" + Constants.INDENT + tasks.Get(index);
+
         saveData.WriteListToFile(tasks);
+
+        return output;
     }
 }

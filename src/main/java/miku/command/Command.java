@@ -28,6 +28,6 @@ public abstract class Command {
         return usage;
     }
 
-    public abstract void Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui)
+    public abstract String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui)
             throws IllegalCommandException, FileIOError;
 }

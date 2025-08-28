@@ -32,7 +32,7 @@ public class MikuBot {
 
     // for running junit tests
     public void RunCommand(String input) {
-        
+
     }
 
     public void Run() {
@@ -51,7 +51,9 @@ public class MikuBot {
             try {
                 Command command = commandHandler.ParseCommand(input);
                 Map<String, String> args = commandHandler.GetArgs(input);
-                command.Run(args, taskList, saveData, ui);
+                String output = command.Run(args, taskList, saveData, ui);
+
+                ui.Print(output);
 
                 if (command.toExit) {
                     break;

@@ -14,13 +14,13 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < tasks.GetLength(); i++) {
             sb.append(String.format("%d. %s\n", i + 1, tasks.Get(i)));
         }
 
-        ui.Print(sb.toString());
+        return sb.toString();
     }
 }

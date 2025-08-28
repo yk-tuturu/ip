@@ -7,6 +7,7 @@ import miku.tasks.DeadlineTask;
 import miku.tasks.Task;
 import miku.tasks.TaskList;
 import miku.ui.UIHandler;
+import miku.util.Constants;
 import miku.util.DateTimeParser;
 
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ public class DeadlineTaskCommand extends Command {
     }
 
     @Override
-    public void Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         if (!arg.containsKey("default")) {
             throw new IllegalCommandException("Miku cannot add an empty task :(", this.usage);
         }
@@ -41,15 +42,16 @@ public class DeadlineTaskCommand extends Command {
         try {
             saveData.Write(task);
         } catch (FileIOError e) {
-            ui.Print(e.getMessage());
-            return;
+            return e.getMessage();
         }
 
         tasks.Add(task);
 
         int len = tasks.GetLength();
 
-        ui.Print(String.format("Miku has added this task to your list!\n    %s\nYou now have %d task%s in your list",
-                task, len, len > 1 ? "s" : ""));
+        return String.format("Miku has added this task to your list!\n" +
+                        "%s%s\n" +
+                        "You now have %d task%s in your list",
+                Constants.INDENT, task, len, len > 1 ? "s" : "");
     }
 }

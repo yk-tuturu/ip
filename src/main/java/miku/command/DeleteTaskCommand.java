@@ -7,6 +7,7 @@ import miku.tasks.EventTask;
 import miku.tasks.Task;
 import miku.tasks.TaskList;
 import miku.ui.UIHandler;
+import miku.util.Constants;
 
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public void Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         if (!arg.containsKey("default")) {
             throw new IllegalCommandException("Parsing index number failed :(", this.usage);
         }
@@ -34,9 +35,13 @@ public class DeleteTaskCommand extends Command {
 
         Task task = tasks.Delete(index);
         int len = tasks.GetLength();
-        String output = String.format("Miku has deleted the task:\n    %s\nNow you have %d task%s remaining",
-                task, len, len != 1 ? "s" : "");
-        ui.Print(output);
+        String output = String.format("Miku has deleted the task:\n" +
+                        "%s%s\n" +
+                        "Now you have %d task%s remaining",
+                Constants.INDENT, task, len, len != 1 ? "s" : "");
+
         saveData.WriteListToFile(tasks);
+
+        return output;
     }
 }

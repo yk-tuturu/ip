@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui)  {
+    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui)  {
         String output = "hello: say hello to miku.MikuBot!\n" +
                 "bye: say goodbye to miku.MikuBot :(\n" +
                 "help: shows this command\n" +
@@ -26,6 +26,6 @@ public class HelpCommand extends Command {
                 "unmark <index>: mark a task as not done\n" +
                 "delete <index>: delete a task from the list\n" +
                 "list: shows all tasks\n";
-        ui.Print(output);
+        return output;
     }
 }
