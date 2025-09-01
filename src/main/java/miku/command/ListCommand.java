@@ -14,7 +14,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < tasks.GetLength(); i++) {

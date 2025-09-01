@@ -14,7 +14,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         return "See you in the next sekai!";
     }
 }

@@ -10,7 +10,6 @@ import miku.ui.UIHandler;
 import miku.util.Constants;
 import miku.util.DateTimeParser;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -20,7 +19,7 @@ public class DeadlineTaskCommand extends Command {
     }
 
     @Override
-    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         if (!arg.containsKey("default")) {
             throw new IllegalCommandException("Miku cannot add an empty task :(", this.usage);
         }
@@ -40,7 +39,7 @@ public class DeadlineTaskCommand extends Command {
         Task task = new DeadlineTask(arg.get("default"), date);
         // tries to write to save file first, if fail abort the whole thing
         try {
-            saveData.Write(task);
+            saveData.write(task);
         } catch (FileIOError e) {
             return e.getMessage();
         }

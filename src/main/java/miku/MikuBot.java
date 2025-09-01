@@ -3,7 +3,6 @@ package miku;
 import miku.command.Command;
 import miku.command.CommandHandler;
 import miku.exceptions.FileIOError;
-import miku.exceptions.IllegalSaveException;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.ui.UIHandler;
@@ -24,22 +23,22 @@ public class MikuBot {
         ui = new UIHandler();
 
         try {
-            saveData.Init();
+            saveData.init();
         } catch (FileIOError e) {
-            ui.Print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
     public void ClearSave() {
-        saveData.ClearSave();
+        saveData.clearSave();
     }
 
     // for running junit tests
     public String RunCommand(String input) {
         try {
-            Command command = commandHandler.ParseCommand(input);
-            Map<String, String> args = commandHandler.GetArgs(input);
-            String output = command.Run(args, taskList, saveData, ui);
+            Command command = commandHandler.parseCommand(input);
+            Map<String, String> args = commandHandler.getArgs(input);
+            String output = command.run(args, taskList, saveData, ui);
 
             return output;
 
@@ -49,31 +48,31 @@ public class MikuBot {
     }
 
     public void Run() {
-        ui.PrintIntro();
+        ui.printIntro();
         Scanner scanner = new Scanner(System.in);
 
         try {
-            saveData.Init();
-            saveData.PopulateTasks(taskList);
+            saveData.init();
+            saveData.populateTasks(taskList);
         } catch (FileIOError e) {
-            ui.Print("Miku can't initialize the save file!");
+            ui.print("Miku can't initialize the save file!");
         }
 
         while (true) {
             String input = scanner.nextLine();
             try {
-                Command command = commandHandler.ParseCommand(input);
-                Map<String, String> args = commandHandler.GetArgs(input);
-                String output = command.Run(args, taskList, saveData, ui);
+                Command command = commandHandler.parseCommand(input);
+                Map<String, String> args = commandHandler.getArgs(input);
+                String output = command.run(args, taskList, saveData, ui);
 
-                ui.Print(output);
+                ui.print(output);
 
                 if (command.toExit) {
                     break;
                 }
 
             } catch (Exception e) {
-                ui.Print(e.getMessage());
+                ui.print(e.getMessage());
             }
         }
     }

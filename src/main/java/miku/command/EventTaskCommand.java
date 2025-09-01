@@ -19,7 +19,7 @@ public class EventTaskCommand extends Command {
     }
 
     @Override
-    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         if (!arg.containsKey("default")) {
             throw new IllegalCommandException("Miku cannot add an empty task :(", this.usage);
         }
@@ -45,7 +45,7 @@ public class EventTaskCommand extends Command {
 
         // tries to write to save file first, if fail abort the whole thing
         try {
-            saveData.Write(task);
+            saveData.write(task);
         } catch (FileIOError e) {
             return e.getMessage();
         }

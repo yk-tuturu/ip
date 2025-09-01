@@ -13,7 +13,7 @@ public class HelloCommand extends Command {
     }
 
     @Override
-    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         return "Hello sekai!";
     }
 }

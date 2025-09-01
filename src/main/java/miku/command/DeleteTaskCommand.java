@@ -2,8 +2,6 @@ package miku.command;
 
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
-import miku.tasks.DeadlineTask;
-import miku.tasks.EventTask;
 import miku.tasks.Task;
 import miku.tasks.TaskList;
 import miku.ui.UIHandler;
@@ -17,7 +15,7 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         if (!arg.containsKey("default")) {
             throw new IllegalCommandException("Parsing index number failed :(", this.usage);
         }
@@ -40,7 +38,7 @@ public class DeleteTaskCommand extends Command {
                         "Now you have %d task%s remaining",
                 Constants.INDENT, task, len, len != 1 ? "s" : "");
 
-        saveData.WriteListToFile(tasks);
+        saveData.writeListToFile(tasks);
 
         return output;
     }

@@ -16,7 +16,7 @@ public class TodoTaskCommand extends Command {
     }
 
     @Override
-    public String Run(Map<String, String> args, TaskList tasks, SaveDataManager saveData, UIHandler ui)
+    public String run(Map<String, String> args, TaskList tasks, SaveDataManager saveData, UIHandler ui)
             throws IllegalCommandException {
         if (args.get("default") == null) {
             throw new IllegalCommandException("Miku cannot add an empty task!", this.usage);
@@ -26,7 +26,7 @@ public class TodoTaskCommand extends Command {
 
         // tries to write to save file first, if fail abort the whole thing
         try {
-            saveData.Write(task);
+            saveData.write(task);
         } catch (FileIOError e) {
             return e.getMessage();
         }

@@ -2,31 +2,31 @@ package miku.tasks;
 
 public abstract class Task {
     public String value;
-    public boolean done;
+    public boolean isDone;
 
     public Task(String value) {
         this.value = value;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public Task(String value, boolean done) {
+    public Task(String value, boolean isDone) {
         this.value = value;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public String toString() {
-        return String.format("[%s] %s", done ? "x" : " ", value);
+        return String.format("[%s] %s", isDone ? "x" : " ", value);
     }
 
     public String getSaveString() {
-        return String.format("%d|%s", done ? 1 : 0, value);
+        return String.format("%d|%s", isDone ? 1 : 0, value);
     }
 
     public void mark() {
-        done = true;
+        isDone = true;
     }
 
     public void unmark() {
-        done = false;
+        isDone = false;
     }
 }

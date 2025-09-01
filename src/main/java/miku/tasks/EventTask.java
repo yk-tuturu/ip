@@ -14,8 +14,8 @@ public class EventTask extends Task {
         this.to = to;
     }
 
-    public EventTask(String value, LocalDateTime from, LocalDateTime to, boolean done) {
-        super(value, done);
+    public EventTask(String value, LocalDateTime from, LocalDateTime to, boolean isDone) {
+        super(value, isDone);
         this.from = from;
         this.to = to;
     }

@@ -2,7 +2,6 @@ package miku.tasks;
 
 import miku.util.DateTimeParser;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class DeadlineTask extends Task {
@@ -13,8 +12,8 @@ public class DeadlineTask extends Task {
         this.deadline = deadline;
     }
 
-    public DeadlineTask(String value, LocalDateTime deadline, boolean done) {
-        super(value, done);
+    public DeadlineTask(String value, LocalDateTime deadline, boolean isDone) {
+        super(value, isDone);
         this.deadline = deadline;
     }
 

@@ -36,11 +36,11 @@ public class UIHandler {
             "Welcome to our sekai!\n" +
             "--------------------------------------------------------------------------";
 
-    public void PrintIntro() {
+    public void printIntro() {
         System.out.println(logo);
     }
 
-    public void Print(String arg) {
+    public void print(String arg) {
         String indent = "     ";
         StringBuilder sb = new StringBuilder();
 

@@ -22,7 +22,7 @@ public class CommandHandler {
         commandMap.put("delete", new DeleteTaskCommand());
     }
 
-    public Command ParseCommand(String input) throws UnrecognizedCommandException, IllegalCommandException {
+    public Command parseCommand(String input) throws UnrecognizedCommandException, IllegalCommandException {
         String[] parts = input.split("\\s+", 2);
         String key = parts[0].toLowerCase();
         String argsPart = parts.length > 1 ? parts[1] : "";
@@ -35,7 +35,7 @@ public class CommandHandler {
         return command;
     }
 
-    public Map<String, String> GetArgs(String input) {
+    public Map<String, String> getArgs(String input) {
         String[] parts = input.split("\\s+");
         StringBuilder sb = new StringBuilder();
         String keyword = "";

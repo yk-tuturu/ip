@@ -14,7 +14,7 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         // not error handling here pains me but we'll save that for a future commit
         if (!arg.containsKey("default")) {
             throw new IllegalCommandException("Parsing index number failed :(");
@@ -35,7 +35,7 @@ public class UnmarkCommand extends Command {
 
         String output = "Aw man! You still haven't finished the task:\n" + Constants.INDENT + tasks.Get(index);
 
-        saveData.WriteListToFile(tasks);
+        saveData.writeListToFile(tasks);
 
         return output;
     }

@@ -2,7 +2,6 @@ package miku.storage;
 
 import miku.exceptions.FileIOError;
 import miku.exceptions.IllegalCommandException;
-import miku.exceptions.IllegalSaveException;
 import miku.tasks.*;
 import miku.util.DateTimeParser;
 
@@ -18,7 +17,7 @@ public class SaveDataManager {
 
     private boolean isInit = false;
 
-    public void Init() throws FileIOError {
+    public void init() throws FileIOError {
         this.dir = new File("data");
         this.file = new File("data/save.txt");
 
@@ -47,7 +46,7 @@ public class SaveDataManager {
         isInit = true;
     }
 
-    public void Write(Task task) throws FileIOError {
+    public void write(Task task) throws FileIOError {
         String taskString = task.getSaveString();
 
         try (FileWriter writer = new FileWriter(file.getPath(), true)) {
@@ -57,7 +56,7 @@ public class SaveDataManager {
         }
     }
 
-    public void PopulateTasks(TaskList list) throws FileIOError {
+    public void populateTasks(TaskList list) throws FileIOError {
         List<String> lines;
         try {
             lines = Files.readAllLines(file.toPath());
@@ -104,11 +103,11 @@ public class SaveDataManager {
 
         // cleans by basically rewriting the save file to only contain valid saved tasks
         if (needClean) {
-            WriteListToFile(list);
+            writeListToFile(list);
         }
     }
 
-    public void WriteListToFile(TaskList list) {
+    public void writeListToFile(TaskList list) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.GetLength(); i++) {
             Task task = list.Get(i);
@@ -123,7 +122,7 @@ public class SaveDataManager {
         }
     }
 
-    public void ClearSave() {
+    public void clearSave() {
         String path = file.getPath();
         try (FileWriter fw = new FileWriter(path, false)) { // false = overwrite
             // do nothing, this truncates the file
@@ -131,7 +130,4 @@ public class SaveDataManager {
             return;
         }
     }
-
-
-
 }
