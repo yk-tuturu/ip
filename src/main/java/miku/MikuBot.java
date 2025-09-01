@@ -30,9 +30,22 @@ public class MikuBot {
         }
     }
 
-    // for running junit tests
-    public void RunCommand(String input) {
+    public void ClearSave() {
+        saveData.ClearSave();
+    }
 
+    // for running junit tests
+    public String RunCommand(String input) {
+        try {
+            Command command = commandHandler.ParseCommand(input);
+            Map<String, String> args = commandHandler.GetArgs(input);
+            String output = command.Run(args, taskList, saveData, ui);
+
+            return output;
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     public void Run() {

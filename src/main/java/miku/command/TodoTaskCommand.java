@@ -19,7 +19,7 @@ public class TodoTaskCommand extends Command {
     public String Run(Map<String, String> args, TaskList tasks, SaveDataManager saveData, UIHandler ui)
             throws IllegalCommandException {
         if (args.get("default") == null) {
-            throw new IllegalCommandException("Miku cannot add an empty task!");
+            throw new IllegalCommandException("Miku cannot add an empty task!", this.usage);
         }
 
         TodoTask task = new TodoTask(args.get("default"));

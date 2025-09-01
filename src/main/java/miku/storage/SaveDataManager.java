@@ -123,6 +123,15 @@ public class SaveDataManager {
         }
     }
 
+    public void ClearSave() {
+        String path = file.getPath();
+        try (FileWriter fw = new FileWriter(path, false)) { // false = overwrite
+            // do nothing, this truncates the file
+        } catch (IOException e) {
+            return;
+        }
+    }
+
 
 
 }
