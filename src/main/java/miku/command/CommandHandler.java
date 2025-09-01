@@ -20,6 +20,7 @@ public class CommandHandler {
         commandMap.put("mark", new MarkCommand());
         commandMap.put("unmark", new UnmarkCommand());
         commandMap.put("delete", new DeleteTaskCommand());
+        commandMap.put("find", new FindCommand());
     }
 
     public Command ParseCommand(String input) throws UnrecognizedCommandException, IllegalCommandException {
