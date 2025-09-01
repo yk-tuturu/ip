@@ -1,20 +1,20 @@
 package miku.command;
 
-import miku.exceptions.IllegalCommandException;
+import java.util.Map;
+
 import miku.exceptions.FileIOError;
+import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
-import miku.ui.UIHandler;
-
-import java.util.Map;
+import miku.ui.UiHandler;
 
 /**
  * A base abstract class for all bot commands
  */
 public abstract class Command {
-    public String key;
-    public String usage;
-    public boolean toExit;
+    private String key;
+    private String usage;
+    private boolean toExit;
 
     /**
      * Constructor
@@ -38,6 +38,18 @@ public abstract class Command {
         this.toExit = true;
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public String getUsage() {
+        return usage;
+    }
+
+    public boolean isToExit() {
+        return toExit;
+    }
+
     /**
      * Just returns the usage of the command
      * @return string containing the usage of the command
@@ -48,7 +60,8 @@ public abstract class Command {
 
     /**
      * Executes the command
-     * @param arg the arguments for the command, if any. Parsed into a Map mapping the argument keyword to argument value.
+     * @param arg the arguments for the command, if any.
+     *            Parsed into a Map mapping the argument keyword to argument value.
      *            If command doesn't have arguments, the default key is 'default'
      * @param tasks taskList from the main bot
      * @param saveData saveDataManager of the main bot
@@ -57,6 +70,6 @@ public abstract class Command {
      * @throws IllegalCommandException if the command arguments are incorrectly formatted
      * @throws FileIOError thrown with regards to save file issues
      */
-    public abstract String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui)
+    public abstract String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UiHandler ui)
             throws IllegalCommandException, FileIOError;
 }

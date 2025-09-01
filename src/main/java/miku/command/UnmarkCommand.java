@@ -1,12 +1,12 @@
 package miku.command;
 
+import java.util.Map;
+
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
-import miku.ui.UIHandler;
+import miku.ui.UiHandler;
 import miku.util.Constants;
-
-import java.util.Map;
 
 /**
  * Command that marks a task in the task list as not completed.
@@ -39,7 +39,8 @@ public class UnmarkCommand extends Command {
      * @throws IllegalCommandException if the index is missing, invalid, or out of bounds
      */
     @Override
-    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UiHandler ui)
+            throws IllegalCommandException {
         // not error handling here pains me but we'll save that for a future commit
         if (!arg.containsKey("default")) {
             throw new IllegalCommandException("Parsing index number failed :(");

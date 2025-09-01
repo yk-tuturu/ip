@@ -1,10 +1,10 @@
 package miku.command;
 
-import miku.exceptions.IllegalCommandException;
-import miku.exceptions.UnrecognizedCommandException;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import miku.exceptions.IllegalCommandException;
+import miku.exceptions.UnrecognizedCommandException;
 
 /**
  * Class that parses commands from a given input string. contains also the classes for all available commands
@@ -12,6 +12,9 @@ import java.util.Map;
 public class CommandHandler {
     private final Map<String, Command> commandMap = new HashMap<>();
 
+    /**
+     * Creates a new command handler and adds all commands to the map
+     */
     public CommandHandler() {
         commandMap.put("todo", new TodoTaskCommand());
         commandMap.put("list", new ListCommand());
@@ -50,7 +53,8 @@ public class CommandHandler {
     /**
      * Parses a command to get its arguments
      * @param input the input string
-     * @return Map<String, String> where the key is the identifier of the argument, and the value is the value of the argument
+     * @return Map(String, String) where the key is the identifier of the argument,
+     * and the value is the value of the argument
      */
     public Map<String, String> getArgs(String input) {
         String[] parts = input.split("\\s+");

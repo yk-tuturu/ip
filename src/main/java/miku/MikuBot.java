@@ -5,7 +5,7 @@ import miku.command.CommandHandler;
 import miku.exceptions.FileIOError;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
-import miku.ui.UIHandler;
+import miku.ui.UiHandler;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -20,7 +20,7 @@ public class MikuBot {
     private TaskList taskList;
     private CommandHandler commandHandler;
     private SaveDataManager saveData;
-    private UIHandler ui;
+    private UiHandler ui;
 
     /**
      * Constructs a new MikuBot instance and initializes save data.
@@ -29,7 +29,7 @@ public class MikuBot {
         taskList = new TaskList();
         commandHandler = new CommandHandler();
         saveData = new SaveDataManager();
-        ui = new UIHandler();
+        ui = new UiHandler();
 
         try {
             saveData.init();
@@ -91,7 +91,7 @@ public class MikuBot {
 
                 ui.print(output);
 
-                if (command.toExit) {
+                if (command.isToExit()) {
                     break;
                 }
 

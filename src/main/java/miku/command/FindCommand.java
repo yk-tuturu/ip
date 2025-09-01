@@ -1,15 +1,19 @@
 package miku.command;
 
-import java.util.Map;
 import java.util.ArrayList;
+import java.util.Map;
 
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
-import miku.tasks.TaskList;
-import miku.ui.UIHandler;
 import miku.tasks.Task;
+import miku.tasks.TaskList;
+import miku.ui.UiHandler;
+
 
 public class FindCommand extends Command {
+    /**
+     * Creates new find command
+     */
     public FindCommand() {
         super("find", "find <searchterm>");
     }
@@ -24,9 +28,10 @@ public class FindCommand extends Command {
      * @throws IllegalCommandException if no search term provided
      */
     @Override
-    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UiHandler ui)
+            throws IllegalCommandException {
         if (!arg.containsKey("default") || arg.get("default").isEmpty()) {
-            throw new IllegalCommandException("Search term cannot be empty!", this.usage);
+            throw new IllegalCommandException("Search term cannot be empty!", this.getUsage());
         }
 
         ArrayList<Task> matchingTasks = new ArrayList<Task>();

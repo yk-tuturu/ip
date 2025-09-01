@@ -1,17 +1,18 @@
 package miku.command;
 
-import miku.exceptions.IllegalCommandException;
+import java.time.LocalDateTime;
+import java.util.Map;
+
 import miku.exceptions.FileIOError;
+import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
 import miku.tasks.EventTask;
 import miku.tasks.Task;
 import miku.tasks.TaskList;
-import miku.ui.UIHandler;
+import miku.ui.UiHandler;
 import miku.util.Constants;
 import miku.util.DateTimeParser;
 
-import java.time.LocalDateTime;
-import java.util.Map;
 
 /**
  * Command that creates and adds an {@link EventTask} with a start and end time.
@@ -46,17 +47,18 @@ public class EventTaskCommand extends Command {
      * @throws IllegalCommandException if required arguments are missing or invalid
      */
     @Override
-    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UiHandler ui)
+            throws IllegalCommandException {
         if (!arg.containsKey("default")) {
-            throw new IllegalCommandException("Miku cannot add an empty task :(", this.usage);
+            throw new IllegalCommandException("Miku cannot add an empty task :(", this.getUsage());
         }
 
         if (!arg.containsKey("from")) {
-            throw new IllegalCommandException("Time range cannot be empty :(", this.usage);
+            throw new IllegalCommandException("Time range cannot be empty :(", this.getUsage());
         }
 
         if (!arg.containsKey("to")) {
-            throw new IllegalCommandException("Time range cannot be empty :(", this.usage);
+            throw new IllegalCommandException("Time range cannot be empty :(", this.getUsage());
         }
 
         LocalDateTime from;
@@ -81,9 +83,9 @@ public class EventTaskCommand extends Command {
 
         int len = tasks.GetLength();
 
-        return String.format("Miku has added this task to your list!\n" +
-                        "%s%s\n" +
-                        "You now have %d task%s in your list",
+        return String.format("Miku has added this task to your list!\n"
+                        + "%s%s\n"
+                        + "You now have %d task%s in your list",
                 Constants.INDENT, task, len, len > 1 ? "s" : "");
     }
 }

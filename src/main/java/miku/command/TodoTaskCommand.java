@@ -1,14 +1,15 @@
 package miku.command;
 
-import miku.exceptions.IllegalCommandException;
+import java.util.Map;
+
 import miku.exceptions.FileIOError;
+import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.tasks.TodoTask;
-import miku.ui.UIHandler;
+import miku.ui.UiHandler;
 import miku.util.Constants;
 
-import java.util.Map;
 
 /**
  * Command that creates and adds a {@link TodoTask}.
@@ -40,10 +41,10 @@ public class TodoTaskCommand extends Command {
      * @throws IllegalCommandException if the task description is missing
      */
     @Override
-    public String run(Map<String, String> args, TaskList tasks, SaveDataManager saveData, UIHandler ui)
+    public String run(Map<String, String> args, TaskList tasks, SaveDataManager saveData, UiHandler ui)
             throws IllegalCommandException {
         if (args.get("default") == null) {
-            throw new IllegalCommandException("Miku cannot add an empty task!", this.usage);
+            throw new IllegalCommandException("Miku cannot add an empty task!", this.getUsage());
         }
 
         TodoTask task = new TodoTask(args.get("default"));
@@ -58,9 +59,9 @@ public class TodoTaskCommand extends Command {
         tasks.Add(task);
 
         int len = tasks.GetLength();
-        return String.format("Miku has added this task to your list!\n" +
-                        "%s%s\n" +
-                        "You now have %d task%s in your list",
+        return String.format("Miku has added this task to your list!\n"
+                        + "%s%s\n"
+                        + "You now have %d task%s in your list",
                 Constants.INDENT, task, len, len > 1 ? "s" : "");
     }
 }

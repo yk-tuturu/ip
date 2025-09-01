@@ -1,13 +1,13 @@
 package miku.command;
 
+import java.util.Map;
+
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
 import miku.tasks.Task;
 import miku.tasks.TaskList;
-import miku.ui.UIHandler;
+import miku.ui.UiHandler;
 import miku.util.Constants;
-
-import java.util.Map;
 
 /**
  * Command that deletes a task from the task list by its index.
@@ -40,9 +40,10 @@ public class DeleteTaskCommand extends Command {
      * @throws IllegalCommandException if the index is missing, invalid, or out of bounds
      */
     @Override
-    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UiHandler ui)
+            throws IllegalCommandException {
         if (!arg.containsKey("default")) {
-            throw new IllegalCommandException("Parsing index number failed :(", this.usage);
+            throw new IllegalCommandException("Parsing index number failed :(", this.getUsage());
         }
 
         int index;
@@ -58,9 +59,9 @@ public class DeleteTaskCommand extends Command {
 
         Task task = tasks.Delete(index);
         int len = tasks.GetLength();
-        String output = String.format("Miku has deleted the task:\n" +
-                        "%s%s\n" +
-                        "Now you have %d task%s remaining",
+        String output = String.format("Miku has deleted the task:\n"
+                        + "%s%s\n"
+                        + "Now you have %d task%s remaining",
                 Constants.INDENT, task, len, len != 1 ? "s" : "");
 
         saveData.writeListToFile(tasks);
