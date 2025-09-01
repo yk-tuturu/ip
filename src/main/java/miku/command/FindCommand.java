@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * @throws IllegalCommandException if no search term provided
      */
     @Override
-    public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         if (!arg.containsKey("default") || arg.get("default").isEmpty()) {
             throw new IllegalCommandException("Search term cannot be empty!", this.usage);
         }
