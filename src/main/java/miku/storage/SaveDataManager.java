@@ -2,7 +2,6 @@ package miku.storage;
 
 import miku.exceptions.FileIOError;
 import miku.exceptions.IllegalCommandException;
-import miku.exceptions.IllegalSaveException;
 import miku.tasks.*;
 import miku.util.DateTimeParser;
 
@@ -12,20 +11,28 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.util.List;
 
+/**
+ * Manages saving and loading tasks from persistent storage.
+ */
 public class SaveDataManager {
     private File dir;
     private File file;
-
     private boolean isInit = false;
 
+    /**
+     * Initializes the save directory and file.
+     * <p>
+     * Creates the "data" directory and "save.txt" file if they do not exist.
+     * </p>
+     *
+     * @throws FileIOError if the directory or file cannot be created
+     */
     public void Init() throws FileIOError {
         this.dir = new File("data");
         this.file = new File("data/save.txt");
 
         if (!dir.exists() || !dir.isDirectory()) {
-            System.out.println("save dir doesnt exist");
-
-            if (dir.mkdirs()) {  // mkdirs() also creates parent directories
+            if (dir.mkdirs()) {
                 System.out.println("Directory created: " + dir.getAbsolutePath());
             } else {
                 throw new FileIOError();
@@ -47,6 +54,12 @@ public class SaveDataManager {
         isInit = true;
     }
 
+    /**
+     * Writes a single task to the save file.
+     *
+     * @param task the task to write
+     * @throws FileIOError if writing fails
+     */
     public void Write(Task task) throws FileIOError {
         String taskString = task.getSaveString();
 
@@ -57,6 +70,15 @@ public class SaveDataManager {
         }
     }
 
+    /**
+     * Populates a task list by reading tasks from the save file.
+     * <p>
+     * Invalid lines are ignored, and the file is cleaned if illegal entries are found.
+     * </p>
+     *
+     * @param list the task list to populate
+     * @throws FileIOError if reading the file fails
+     */
     public void PopulateTasks(TaskList list) throws FileIOError {
         List<String> lines;
         try {
@@ -65,7 +87,6 @@ public class SaveDataManager {
             throw new FileIOError();
         }
 
-        // if illegal characters found in save file, later will rewrite the save file with only the valid inputs
         boolean needClean = false;
 
         for (String line : lines) {
@@ -85,9 +106,7 @@ public class SaveDataManager {
                         task = new EventTask(parts[2], DateTimeParser.parse(parts[3]),
                                 DateTimeParser.parse(parts[4]), parts[1].charAt(0)=='1');
                         break;
-
                     default:
-                        // if we reach the default case, something is wrong, and we need to clean the file
                         needClean = true;
                 }
 
@@ -95,25 +114,26 @@ public class SaveDataManager {
                     list.Add(task);
                 }
 
-            } catch (IndexOutOfBoundsException e) {
-                needClean = true;
-            } catch (IllegalCommandException e) {
+            } catch (IndexOutOfBoundsException | IllegalCommandException e) {
                 needClean = true;
             }
         }
 
-        // cleans by basically rewriting the save file to only contain valid saved tasks
         if (needClean) {
             WriteListToFile(list);
         }
     }
 
+    /**
+     * Overwrites the save file with all tasks from the given list.
+     *
+     * @param list the task list to save
+     */
     public void WriteListToFile(TaskList list) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.GetLength(); i++) {
             Task task = list.Get(i);
-            String taskString = task.getSaveString();
-            sb.append(taskString).append("\n");
+            sb.append(task.getSaveString()).append("\n");
         }
 
         try (FileWriter writer = new FileWriter(file.getPath(), false)) {
@@ -123,15 +143,15 @@ public class SaveDataManager {
         }
     }
 
+    /**
+     * Clears the save file completely.
+     */
     public void ClearSave() {
         String path = file.getPath();
         try (FileWriter fw = new FileWriter(path, false)) { // false = overwrite
-            // do nothing, this truncates the file
+            // truncates the file
         } catch (IOException e) {
             return;
         }
     }
-
-
-
 }

@@ -14,11 +14,24 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+/**
+ * Inserts a task with a deadline to the task list. Usage: deadline (task) /by (deadline)
+ * Deadline given must be a valid date
+ */
 public class DeadlineTaskCommand extends Command {
     public DeadlineTaskCommand() {
         super("deadline", "deadline <task> /by <time>");
     }
 
+    /**
+     * Runs the command to add a deadline task. Does not add the task if there are any errors
+     * @param arg the arguments for the command, if any. The given task name is passed into 'default' and the deadline is stored under 'by'
+     * @param tasks taskList from the main bot
+     * @param saveData saveDataManager of the main bot
+     * @param ui uiManager of the main bot
+     * @return a string declaring success or failure on addition
+     * @throws IllegalCommandException if bad argument formatting (eg bad dates, empty task, etc)
+     */
     @Override
     public String Run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UIHandler ui) throws IllegalCommandException {
         if (!arg.containsKey("default")) {

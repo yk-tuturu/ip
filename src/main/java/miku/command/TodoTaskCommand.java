@@ -10,11 +10,35 @@ import miku.util.Constants;
 
 import java.util.Map;
 
+/**
+ * Command that creates and adds a {@link TodoTask}.
+ */
 public class TodoTaskCommand extends Command {
+
+    /**
+     * Creates a new todo command with keyword {@code "todo"}.
+     */
     public TodoTaskCommand() {
         super("todo", "todo <task>");
     }
 
+    /**
+     * Adds a todo task to the task list.
+     * <p>
+     * Requires:
+     * <ul>
+     *   <li>{@code default} – the task description</li>
+     * </ul>
+     * If the description is missing, an {@link IllegalCommandException} is thrown.
+     * </p>
+     *
+     * @param args     arguments containing the task description
+     * @param tasks    the task list
+     * @param saveData manager for saving tasks
+     * @param ui       UI handler (not used here)
+     * @return a message confirming the added todo task
+     * @throws IllegalCommandException if the task description is missing
+     */
     @Override
     public String Run(Map<String, String> args, TaskList tasks, SaveDataManager saveData, UIHandler ui)
             throws IllegalCommandException {
@@ -24,7 +48,6 @@ public class TodoTaskCommand extends Command {
 
         TodoTask task = new TodoTask(args.get("default"));
 
-        // tries to write to save file first, if fail abort the whole thing
         try {
             saveData.Write(task);
         } catch (FileIOError e) {
