@@ -10,10 +10,17 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Locale;
 
+/**
+ * Utility class for parsing and formatting dates and times.
+ * <p>
+ * Provides flexible parsing of user input into {@link LocalDateTime} and formatting
+ * {@link LocalDateTime} objects into a readable string.
+ * </p>
+ */
 public class DateTimeParser {
     private static final DateTimeFormatter FLEXIBLE_FORMATTER =
             new DateTimeFormatterBuilder()
-                    // Day / Month / Year
+                    // Day / Month / Year patterns
                     .appendPattern("[d/M/uuuu][uuuu-MM-dd][uuuu/MM/dd][d-M-uuuu][uuuu/M/d]")
                     .optionalStart()
                     .appendLiteral(' ')
@@ -23,6 +30,16 @@ public class DateTimeParser {
                     .toFormatter(Locale.ENGLISH)
                     .withResolverStyle(ResolverStyle.SMART);
 
+    /**
+     * Parses a string into a {@link LocalDateTime}.
+     * <p>
+     * Supports multiple date and time formats. If the time is omitted, defaults to start of day.
+     * </p>
+     *
+     * @param input the date/time string to parse (required)
+     * @return the parsed LocalDateTime
+     * @throws IllegalCommandException if parsing fails
+     */
     public static LocalDateTime parse(String input) throws IllegalCommandException {
         try {
             return LocalDateTime.parse(input, FLEXIBLE_FORMATTER);
@@ -38,6 +55,12 @@ public class DateTimeParser {
         }
     }
 
+    /**
+     * Formats a {@link LocalDateTime} into a readable string.
+     *
+     * @param time the LocalDateTime to format (required)
+     * @return a formatted string in the pattern "MMM d yyyy h:mma"
+     */
     public static String getDateString(LocalDateTime time) {
         return time.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma"));
     }

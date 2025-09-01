@@ -10,12 +10,21 @@ import miku.ui.UIHandler;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Main class for the MikuBot application.
+ * <p>
+ * Manages tasks, user input, commands, and save data. Provides an interactive console interface.
+ * </p>
+ */
 public class MikuBot {
     private TaskList taskList;
     private CommandHandler commandHandler;
     private SaveDataManager saveData;
     private UIHandler ui;
 
+    /**
+     * Constructs a new MikuBot instance and initializes save data.
+     */
     public MikuBot() {
         taskList = new TaskList();
         commandHandler = new CommandHandler();
@@ -29,11 +38,19 @@ public class MikuBot {
         }
     }
 
+    /**
+     * Clears all saved tasks from the save file. Mostly for running tests.
+     */
     public void ClearSave() {
         saveData.clearSave();
     }
 
-    // for running junit tests
+    /**
+     * Executes a single command (used for unit testing or programmatic input).
+     *
+     * @param input the command string (required)
+     * @return the output message or error message
+     */
     public String RunCommand(String input) {
         try {
             Command command = commandHandler.parseCommand(input);
@@ -47,6 +64,13 @@ public class MikuBot {
         }
     }
 
+    /**
+     * Runs the interactive console loop.
+     * <p>
+     * Prints the intro, populates tasks from save file, and repeatedly reads user input
+     * to execute commands until an exit command is received.
+     * </p>
+     */
     public void Run() {
         ui.printIntro();
         Scanner scanner = new Scanner(System.in);
@@ -77,6 +101,11 @@ public class MikuBot {
         }
     }
 
+    /**
+     * Entry point for the MikuBot application.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         MikuBot bot = new MikuBot();
         bot.Run();
