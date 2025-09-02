@@ -24,6 +24,8 @@ public class MikuBot {
     private SaveDataManager saveData;
     private UiHandler ui;
 
+    private boolean toTerminate = false;
+
     /**
      * Constructs a new MikuBot instance and initializes save data.
      */
@@ -59,11 +61,19 @@ public class MikuBot {
             Map<String, String> args = commandHandler.getArgs(input);
             String output = command.run(args, taskList, saveData, ui);
 
+            if (command.isToExit()) {
+                toTerminate = true;
+            }
+
             return output;
 
         } catch (Exception e) {
             return e.getMessage();
         }
+    }
+
+    public boolean getToTerminate() {
+        return toTerminate;
     }
 
     /**
@@ -102,16 +112,5 @@ public class MikuBot {
                 ui.print(e.getMessage());
             }
         }
-    }
-
-    /**
-     * Entry point for the MikuBot application.
-     *
-     * @param args command-line arguments (not used)
-     */
-    public static void main(String[] args) {
-        Application.launch(GUI.class, args);
-//        MikuBot bot = new MikuBot();
-//        bot.Run();
     }
 }
