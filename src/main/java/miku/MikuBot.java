@@ -1,10 +1,12 @@
 package miku;
 
+import javafx.application.Application;
 import miku.command.Command;
 import miku.command.CommandHandler;
 import miku.exceptions.FileIOError;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
+import miku.ui.GUI;
 import miku.ui.UiHandler;
 
 import java.util.Map;
@@ -72,6 +74,7 @@ public class MikuBot {
      * </p>
      */
     public void Run() {
+
         ui.printIntro();
         Scanner scanner = new Scanner(System.in);
 
@@ -107,7 +110,8 @@ public class MikuBot {
      * @param args command-line arguments (not used)
      */
     public static void main(String[] args) {
-        MikuBot bot = new MikuBot();
-        bot.Run();
+        Application.launch(GUI.class, args);
+//        MikuBot bot = new MikuBot();
+//        bot.Run();
     }
 }
