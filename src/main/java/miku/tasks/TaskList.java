@@ -32,6 +32,7 @@ public class TaskList {
      * @return the task at the specified index
      */
     public Task Get(int index) {
+        assert(index > 0 && index < taskList.size());
         return taskList.get(index);
     }
 
@@ -41,6 +42,7 @@ public class TaskList {
      * @param index the index of the task (0-based)
      */
     public void MarkTask(int index) {
+        assert(index > 0 && index < taskList.size());
         this.Get(index).mark();
     }
 
@@ -50,6 +52,7 @@ public class TaskList {
      * @param index the index of the task (0-based)
      */
     public void UnmarkTask(int index) {
+        assert(index > 0 && index < taskList.size());
         this.Get(index).unmark();
     }
 
@@ -69,6 +72,7 @@ public class TaskList {
      * @return the task that was removed
      */
     public Task Delete(int index) {
+        assert(index > 0 && index < taskList.size());
         Task task = taskList.remove(index);
         return task;
     }
