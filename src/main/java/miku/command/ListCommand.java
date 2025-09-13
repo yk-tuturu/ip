@@ -37,8 +37,8 @@ public class ListCommand extends Command {
             throws IllegalCommandException {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < tasks.GetLength(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, tasks.Get(i)));
+        for (int i = 0; i < tasks.getLength(); i++) {
+            sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
         }
 
         return sb.toString();

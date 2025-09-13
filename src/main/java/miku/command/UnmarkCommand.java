@@ -53,13 +53,13 @@ public class UnmarkCommand extends Command {
             throw new IllegalCommandException("Parsing index number failed :(");
         }
 
-        if (index < 0 || index >= tasks.GetLength()) {
+        if (index < 0 || index >= tasks.getLength()) {
             throw new IllegalCommandException("Index provided is out of bounds :(");
         }
 
-        tasks.UnmarkTask(index);
+        tasks.unmarkTask(index);
 
-        String output = "Aw man! You still haven't finished the task:\n" + Constants.INDENT + tasks.Get(index);
+        String output = "Aw man! You still haven't finished the task:\n" + Constants.INDENT + tasks.get(index);
 
         saveData.writeListToFile(tasks);
 

@@ -1,12 +1,10 @@
 package miku;
 
-import javafx.application.Application;
 import miku.command.Command;
 import miku.command.CommandHandler;
 import miku.exceptions.FileIOError;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
-import miku.ui.GUI;
 import miku.ui.UiHandler;
 
 import java.util.Map;
@@ -45,7 +43,7 @@ public class MikuBot {
     /**
      * Clears all saved tasks from the save file. Mostly for running tests.
      */
-    public void ClearSave() {
+    public void clearSave() {
         saveData.clearSave();
     }
 
@@ -55,13 +53,13 @@ public class MikuBot {
      * @param input the command string (required)
      * @return the output message or error message
      */
-    public String RunCommand(String input) {
+    public String runCommand(String input) {
         try {
             Command command = commandHandler.parseCommand(input);
             Map<String, String> args = commandHandler.getArgs(input);
             String output = command.run(args, taskList, saveData, ui);
 
-            if (command.isToExit()) {
+            if (command.checkToExit()) {
                 toTerminate = true;
             }
 
@@ -83,7 +81,7 @@ public class MikuBot {
      * to execute commands until an exit command is received.
      * </p>
      */
-    public void Run() {
+    public void run() {
 
         ui.printIntro();
         Scanner scanner = new Scanner(System.in);
@@ -104,7 +102,7 @@ public class MikuBot {
 
                 ui.print(output);
 
-                if (command.isToExit()) {
+                if (command.checkToExit()) {
                     break;
                 }
 

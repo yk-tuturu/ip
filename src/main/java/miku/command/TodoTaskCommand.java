@@ -56,9 +56,9 @@ public class TodoTaskCommand extends Command {
             return e.getMessage();
         }
 
-        tasks.Add(task);
+        tasks.add(task);
 
-        int len = tasks.GetLength();
+        int len = tasks.getLength();
         return String.format("Miku has added this task to your list!\n"
                         + "%s%s\n"
                         + "You now have %d task%s in your list",
