@@ -21,7 +21,7 @@ public class TaskList {
      *
      * @param task the task to add (required)
      */
-    public void Add(Task task) {
+    public void add(Task task) {
         taskList.add(task);
     }
 
@@ -31,7 +31,7 @@ public class TaskList {
      * @param index the index of the task (0-based)
      * @return the task at the specified index
      */
-    public Task Get(int index) {
+    public Task get(int index) {
         return taskList.get(index);
     }
 
@@ -40,8 +40,8 @@ public class TaskList {
      *
      * @param index the index of the task (0-based)
      */
-    public void MarkTask(int index) {
-        this.Get(index).mark();
+    public void markTask(int index) {
+        this.get(index).mark();
     }
 
     /**
@@ -49,8 +49,8 @@ public class TaskList {
      *
      * @param index the index of the task (0-based)
      */
-    public void UnmarkTask(int index) {
-        this.Get(index).unmark();
+    public void unmarkTask(int index) {
+        this.get(index).unmark();
     }
 
     /**
@@ -58,7 +58,7 @@ public class TaskList {
      *
      * @return the size of the task list
      */
-    public int GetLength() {
+    public int getLength() {
         return taskList.size();
     }
 
@@ -68,7 +68,7 @@ public class TaskList {
      * @param index the index of the task (0-based)
      * @return the task that was removed
      */
-    public Task Delete(int index) {
+    public Task delete(int index) {
         Task task = taskList.remove(index);
         return task;
     }

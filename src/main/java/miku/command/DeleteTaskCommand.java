@@ -53,12 +53,12 @@ public class DeleteTaskCommand extends Command {
             throw new IllegalCommandException("Parsing index number failed :(");
         }
 
-        if (index < 0 || index >= tasks.GetLength()) {
+        if (index < 0 || index >= tasks.getLength()) {
             throw new IllegalCommandException("Index provided is out of bounds :(");
         }
 
-        Task task = tasks.Delete(index);
-        int len = tasks.GetLength();
+        Task task = tasks.delete(index);
+        int len = tasks.getLength();
         String output = String.format("Miku has deleted the task:\n"
                         + "%s%s\n"
                         + "Now you have %d task%s remaining",

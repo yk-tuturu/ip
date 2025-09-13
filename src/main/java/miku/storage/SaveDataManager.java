@@ -114,7 +114,7 @@ public class SaveDataManager {
                 }
 
                 if (task != null) {
-                    list.Add(task);
+                    list.add(task);
                 }
 
             } catch (IndexOutOfBoundsException | IllegalCommandException e) {
@@ -136,8 +136,8 @@ public class SaveDataManager {
      */
     public void writeListToFile(TaskList list) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < list.GetLength(); i++) {
-            Task task = list.Get(i);
+        for (int i = 0; i < list.getLength(); i++) {
+            Task task = list.get(i);
             sb.append(task.getSaveString()).append("\n");
         }
 
