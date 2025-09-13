@@ -4,8 +4,8 @@ package miku.tasks;
  * Abstract base class representing a generic task.
  */
 public abstract class Task {
-    public String value;
-    public boolean isDone;
+    private String value;
+    private boolean isDone;
 
     /**
      * Creates a new task with the given description.
@@ -24,11 +24,20 @@ public abstract class Task {
      * Creates a new task with the given description and completion status.
      *
      * @param value the task description (required)
-     * @param done  whether the task is completed
+     * @param isDone  whether the task is completed
      */
     public Task(String value, boolean isDone) {
         this.value = value;
         this.isDone = isDone;
+    }
+
+    /**
+     * Gets the value of the task
+     *
+     * @return a string containing the task description
+     */
+    public String getValue() {
+        return this.value;
     }
 
     /**

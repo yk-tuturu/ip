@@ -9,7 +9,9 @@ import miku.tasks.Task;
 import miku.tasks.TaskList;
 import miku.ui.UiHandler;
 
-
+/**
+ * Command to search for tasks by their description
+ */
 public class FindCommand extends Command {
     /**
      * Creates new find command
@@ -38,7 +40,7 @@ public class FindCommand extends Command {
         String search = arg.get("default").toLowerCase();
 
         for (int i = 0; i < tasks.getLength(); i++) {
-            String taskDesc = tasks.get(i).value.toLowerCase();
+            String taskDesc = tasks.get(i).getValue().toLowerCase();
 
             if (taskDesc.contains(search)) {
                 matchingTasks.add(tasks.get(i));

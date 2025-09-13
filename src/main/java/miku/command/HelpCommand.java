@@ -1,10 +1,10 @@
 package miku.command;
 
+import java.util.Map;
+
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.ui.UiHandler;
-
-import java.util.Map;
 
 /**
  * Prints all commands and their correct usages and descriptions
@@ -17,7 +17,8 @@ public class HelpCommand extends Command {
     /**
      * Just prints a list of commands
      *
-     * @param arg the arguments for the command, if any. Parsed into a Map mapping the argument keyword to argument value.
+     * @param arg the arguments for the command, if any.
+     *            Parsed into a Map mapping the argument keyword to argument value.
      *            If command doesn't have arguments, the default key is 'default'
      * @param tasks taskList from the main bot
      * @param saveData saveDataManager of the main bot
@@ -25,7 +26,7 @@ public class HelpCommand extends Command {
      * @return
      */
     @Override
-    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UiHandler ui)  {
+    public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UiHandler ui) {
         String output = "hello: say hello to miku.MikuBot!\n"
                 + "bye: say goodbye to miku.MikuBot :(\n"
                 + "help: shows this command\n"

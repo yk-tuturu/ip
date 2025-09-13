@@ -2,7 +2,10 @@ package miku.exceptions;
 
 import miku.util.Constants;
 
-public class IllegalCommandException  extends Exception {
+/**
+ * When user enters commands wrongly
+ */
+public class IllegalCommandException extends Exception {
     public IllegalCommandException() {
         super("Miku can't understand this command :(");
     }

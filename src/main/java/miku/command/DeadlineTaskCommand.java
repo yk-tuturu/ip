@@ -3,7 +3,7 @@ package miku.command;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-import miku.exceptions.FileIOError;
+import miku.exceptions.FileIoError;
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
 import miku.tasks.DeadlineTask;
@@ -56,7 +56,7 @@ public class DeadlineTaskCommand extends Command {
         // tries to write to save file first, if fail abort the whole thing
         try {
             saveData.write(task);
-        } catch (FileIOError e) {
+        } catch (FileIoError e) {
             return e.getMessage();
         }
 
@@ -64,9 +64,9 @@ public class DeadlineTaskCommand extends Command {
 
         int len = tasks.getLength();
 
-        return String.format("Miku has added this task to your list!\n" +
-                        "%s%s\n" +
-                        "You now have %d task%s in your list",
+        return String.format("Miku has added this task to your list!\n"
+                        + "%s%s\n"
+                        + "You now have %d task%s in your list",
                 Constants.INDENT, task, len, len > 1 ? "s" : "");
     }
 }

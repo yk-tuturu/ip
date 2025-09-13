@@ -2,7 +2,7 @@ package miku.command;
 
 import java.util.Map;
 
-import miku.exceptions.FileIOError;
+import miku.exceptions.FileIoError;
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
@@ -52,7 +52,7 @@ public class TodoTaskCommand extends Command {
         // tries to write to save file first, if fail abort the whole thing
         try {
             saveData.write(task);
-        } catch (FileIOError e) {
+        } catch (FileIoError e) {
             return e.getMessage();
         }
 

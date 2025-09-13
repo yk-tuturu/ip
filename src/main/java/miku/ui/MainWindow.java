@@ -12,6 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import miku.MikuBot;
 
+/**
+ * Rendering logic for the main application window
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -58,6 +61,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Closes the window
+     */
     private void terminate() {
         Platform.exit();
         System.exit(0);

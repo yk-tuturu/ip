@@ -1,8 +1,8 @@
 package miku.tasks;
 
-import miku.util.DateTimeParser;
-
 import java.time.LocalDateTime;
+
+import miku.util.DateTimeParser;
 
 /**
  * Represents a task with a specific deadline.
@@ -21,6 +21,12 @@ public class DeadlineTask extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Creates a new deadline task, but with specification on whether it's done
+     * @param value the task description
+     * @param deadline the deadline date and time
+     * @param isDone whether the task is done or not
+     */
     public DeadlineTask(String value, LocalDateTime deadline, boolean isDone) {
         super(value, isDone);
         this.deadline = deadline;

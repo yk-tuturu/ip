@@ -1,14 +1,14 @@
 package miku;
 
+import java.util.Map;
+import java.util.Scanner;
+
 import miku.command.Command;
 import miku.command.CommandHandler;
-import miku.exceptions.FileIOError;
+import miku.exceptions.FileIoError;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.ui.UiHandler;
-
-import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Main class for the MikuBot application.
@@ -35,7 +35,7 @@ public class MikuBot {
 
         try {
             saveData.init();
-        } catch (FileIOError e) {
+        } catch (FileIoError e) {
             ui.print(e.getMessage());
         }
     }
@@ -89,7 +89,7 @@ public class MikuBot {
         try {
             saveData.init();
             saveData.populateTasks(taskList);
-        } catch (FileIOError e) {
+        } catch (FileIoError e) {
             ui.print("Miku can't initialize the save file!");
         }
 

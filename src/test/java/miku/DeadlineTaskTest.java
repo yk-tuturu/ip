@@ -1,24 +1,25 @@
 package miku;
 
-import miku.util.Constants;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import miku.util.Constants;
 
 public class DeadlineTaskTest {
     @Test
-    public void BasicUsageTest() {
+    public void basicUsageTest() {
         MikuBot bot = new MikuBot();
         bot.clearSave();
 
         String output = bot.runCommand("deadline task /by 16/9/2025 1800");
-        assertEquals("Miku has added this task to your list!\n" +
-                Constants.INDENT + "[D][ ] task (by: Sep 16 2025 6:00pm)\n" +
-                "You now have 1 task in your list", output);
+        assertEquals("Miku has added this task to your list!\n"
+                + Constants.INDENT + "[D][ ] task (by: Sep 16 2025 6:00pm)\n"
+                + "You now have 1 task in your list", output);
     }
 
     @Test
-    public void BadDateTest() {
+    public void badDateTest() {
         MikuBot bot = new MikuBot();
         bot.clearSave();
 
@@ -27,12 +28,13 @@ public class DeadlineTaskTest {
     }
 
     @Test
-    public void EmptyTaskTest() {
+    public void emptyTaskTest() {
         MikuBot bot = new MikuBot();
         bot.clearSave();
 
         String output = bot.runCommand("deadline");
-        assertEquals("Miku cannot add an empty task :(\n" +
-                Constants.INDENT + "Usage: deadline <task> /by <time>", output);
+        assertEquals("Miku cannot add an empty task :(\n"
+                + Constants.INDENT
+                + "Usage: deadline <task> /by <time>", output);
     }
 }

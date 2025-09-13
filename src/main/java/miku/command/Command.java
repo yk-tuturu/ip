@@ -2,7 +2,7 @@ package miku.command;
 
 import java.util.Map;
 
-import miku.exceptions.FileIOError;
+import miku.exceptions.FileIoError;
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
@@ -68,8 +68,8 @@ public abstract class Command {
      * @param ui uiManager of the main bot
      * @return string containing the output of the bot
      * @throws IllegalCommandException if the command arguments are incorrectly formatted
-     * @throws FileIOError thrown with regards to save file issues
+     * @throws FileIoError thrown with regards to save file issues
      */
     public abstract String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UiHandler ui)
-            throws IllegalCommandException, FileIOError;
+            throws IllegalCommandException, FileIoError;
 }

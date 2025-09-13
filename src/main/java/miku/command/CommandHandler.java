@@ -52,8 +52,7 @@ public class CommandHandler {
     /**
      * Parses a command to get its arguments
      * @param input the input string
-     * @return Map(String, String) where the key is the identifier of the argument,
-     * and the value is the value of the argument
+     * @return Map(String, String) where the key is the keyword of the argument,and the value is the val of the argument
      */
     public Map<String, String> getArgs(String input) {
         String[] parts = input.split("\\s+");

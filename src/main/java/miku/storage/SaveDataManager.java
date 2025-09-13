@@ -1,15 +1,19 @@
 package miku.storage;
 
-import miku.exceptions.FileIOError;
-import miku.exceptions.IllegalCommandException;
-import miku.tasks.*;
-import miku.util.DateTimeParser;
-
 import java.io.File;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+
+import miku.exceptions.FileIoError;
+import miku.exceptions.IllegalCommandException;
+import miku.tasks.DeadlineTask;
+import miku.tasks.EventTask;
+import miku.tasks.Task;
+import miku.tasks.TaskList;
+import miku.tasks.TodoTask;
+import miku.util.DateTimeParser;
 
 /**
  * Manages saving and loading tasks from persistent storage.
@@ -25,9 +29,9 @@ public class SaveDataManager {
      * Creates the "data" directory and "save.txt" file if they do not exist.
      * </p>
      *
-     * @throws FileIOError if the directory or file cannot be created
+     * @throws FileIoError if the directory or file cannot be created
      */
-    public void init() throws FileIOError {
+    public void init() throws FileIoError {
         this.dir = new File("data");
         this.file = new File("data/save.txt");
 
@@ -35,7 +39,7 @@ public class SaveDataManager {
             if (dir.mkdirs()) {
                 System.out.println("Directory created: " + dir.getAbsolutePath());
             } else {
-                throw new FileIOError();
+                throw new FileIoError();
             }
         }
 
@@ -47,7 +51,7 @@ public class SaveDataManager {
                     System.out.println("Failed to create file");
                 }
             } catch (IOException e) {
-                throw new FileIOError();
+                throw new FileIoError();
             }
         }
 
@@ -58,15 +62,15 @@ public class SaveDataManager {
      * Writes a single task to the save file.
      *
      * @param task the task to write
-     * @throws FileIOError if writing fails
+     * @throws FileIoError if writing fails
      */
-    public void write(Task task) throws FileIOError {
+    public void write(Task task) throws FileIoError {
         String taskString = task.getSaveString();
 
         try (FileWriter writer = new FileWriter(file.getPath(), true)) {
             writer.write(taskString + "\n");
         } catch (IOException e) {
-            throw new FileIOError("Something went wrong in file write :(");
+            throw new FileIoError("Something went wrong in file write :(");
         }
     }
 
@@ -77,14 +81,14 @@ public class SaveDataManager {
      * </p>
      *
      * @param list the task list to populate
-     * @throws FileIOError if reading the file fails
+     * @throws FileIoError if reading the file fails
      */
-    public void populateTasks(TaskList list) throws FileIOError {
+    public void populateTasks(TaskList list) throws FileIoError {
         List<String> lines;
         try {
             lines = Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new FileIOError();
+            throw new FileIoError();
         }
 
         // if illegal characters found in save file, later will rewrite the save file with only the valid inputs
@@ -97,20 +101,19 @@ public class SaveDataManager {
                 char type = parts[0].charAt(0);
                 Task task = null;
                 switch (type) {
-                    case 'T':
-                        task = new TodoTask(parts[2], parts[1].charAt(0) == '1');
-                        break;
-                    case 'D':
-                        task = new DeadlineTask(parts[2], DateTimeParser.parse(parts[3]), parts[1].charAt(0)=='1');
-                        break;
-                    case 'E':
-                        task = new EventTask(parts[2], DateTimeParser.parse(parts[3]),
-                                DateTimeParser.parse(parts[4]), parts[1].charAt(0)=='1');
-                        break;
-
-                    default:
-                        // if we reach the default case, something is wrong, and we need to clean the file
-                        needClean = true;
+                case 'T':
+                    task = new TodoTask(parts[2], parts[1].charAt(0) == '1');
+                    break;
+                case 'D':
+                    task = new DeadlineTask(parts[2], DateTimeParser.parse(parts[3]), parts[1].charAt(0) == '1');
+                    break;
+                case 'E':
+                    task = new EventTask(parts[2], DateTimeParser.parse(parts[3]),
+                            DateTimeParser.parse(parts[4]), parts[1].charAt(0) == '1');
+                    break;
+                default:
+                    // if we reach the default case, something is wrong, and we need to clean the file
+                    needClean = true;
                 }
 
                 if (task != null) {

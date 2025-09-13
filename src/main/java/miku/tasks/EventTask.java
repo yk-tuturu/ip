@@ -1,15 +1,15 @@
 package miku.tasks;
 
-import miku.util.DateTimeParser;
-
 import java.time.LocalDateTime;
+
+import miku.util.DateTimeParser;
 
 /**
  * Represents a task that occurs within a specific time range.
  */
 public class EventTask extends Task {
-    public LocalDateTime from;
-    public LocalDateTime to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     /**
      * Creates a new event task.
@@ -60,5 +60,23 @@ public class EventTask extends Task {
         String fromString = DateTimeParser.getDateString(from);
         String toString = DateTimeParser.getDateString(to);
         return "E|" + super.getSaveString() + "|" + fromString + "|" + toString;
+    }
+
+    /**
+     * Returns the datetime object for "from"
+     *
+     * @return a LocalDateTime object
+     */
+    public LocalDateTime getFrom() {
+        return this.from;
+    }
+
+    /**
+     * Returns the datetime object for "to"
+     *
+     * @return a LocalDateTime object
+     */
+    public LocalDateTime getTo() {
+        return this.to;
     }
 }
