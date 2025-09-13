@@ -62,6 +62,8 @@ public class DateTimeParser {
      * @return a formatted string in the pattern "MMM d yyyy h:mma"
      */
     public static String getDateString(LocalDateTime time) {
-        return time.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma"));
+        String formatted = time.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma"));
+
+        return formatted.replaceAll("AM", "am").replaceAll("PM", "pm");
     }
 }
