@@ -14,7 +14,7 @@ import miku.ui.UiHandler;
 public abstract class Command {
     private String key;
     private String usage;
-    private boolean toExit;
+    private boolean isToExit;
 
     /**
      * Constructor
@@ -30,12 +30,12 @@ public abstract class Command {
      * Alternate constructor
      * @param key the keyword for the command
      * @param usage the correct usage for the command, provided in errors and help functions
-     * @param toExit defaults to false if not given
+     * @param isToExit defaults to false if not given
      */
-    public Command(String key, String usage, boolean toExit) {
+    public Command(String key, String usage, boolean isToExit) {
         this.key = key;
         this.usage = usage;
-        this.toExit = true;
+        this.isToExit = isToExit;
     }
 
     public String getKey() {
@@ -46,8 +46,8 @@ public abstract class Command {
         return usage;
     }
 
-    public boolean isToExit() {
-        return toExit;
+    public boolean checkToExit() {
+        return isToExit;
     }
 
     /**

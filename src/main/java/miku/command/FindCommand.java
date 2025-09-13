@@ -37,11 +37,11 @@ public class FindCommand extends Command {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         String search = arg.get("default").toLowerCase();
 
-        for (int i = 0; i < tasks.GetLength(); i++) {
-            String taskDesc = tasks.Get(i).value.toLowerCase();
+        for (int i = 0; i < tasks.getLength(); i++) {
+            String taskDesc = tasks.get(i).value.toLowerCase();
 
             if (taskDesc.contains(search)) {
-                matchingTasks.add(tasks.Get(i));
+                matchingTasks.add(tasks.get(i));
             }
         }
 

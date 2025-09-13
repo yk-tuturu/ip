@@ -40,7 +40,6 @@ public class CommandHandler {
     public Command parseCommand(String input) throws UnrecognizedCommandException, IllegalCommandException {
         String[] parts = input.split("\\s+", 2);
         String key = parts[0].toLowerCase();
-        String argsPart = parts.length > 1 ? parts[1] : "";
 
         Command command = commandMap.get(key);
         if (command == null) {

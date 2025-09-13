@@ -50,13 +50,13 @@ public class MarkCommand extends Command {
             throw new IllegalCommandException("Parsing index number failed :(", this.getUsage());
         }
 
-        if (index < 0 || index >= tasks.GetLength()) {
+        if (index < 0 || index >= tasks.getLength()) {
             throw new IllegalCommandException("Index provided is out of bounds :(", this.getUsage());
         }
 
-        tasks.MarkTask(index);
+        tasks.markTask(index);
 
-        String output = "Omedetou! You've finished a task:\n" + Constants.INDENT + tasks.Get(index);
+        String output = "Omedetou! You've finished a task:\n" + Constants.INDENT + tasks.get(index);
 
         saveData.writeListToFile(tasks);
 
