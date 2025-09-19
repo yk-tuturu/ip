@@ -27,6 +27,7 @@ public class CommandHandler {
         commandMap.put("unmark", new UnmarkCommand());
         commandMap.put("delete", new DeleteTaskCommand());
         commandMap.put("find", new FindCommand());
+        commandMap.put("duration", new FixedDurationTaskCommand());
     }
 
     /**

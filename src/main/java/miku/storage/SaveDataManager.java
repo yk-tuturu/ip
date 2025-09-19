@@ -10,6 +10,7 @@ import miku.exceptions.FileIoError;
 import miku.exceptions.IllegalCommandException;
 import miku.tasks.DeadlineTask;
 import miku.tasks.EventTask;
+import miku.tasks.FixedDurationTask;
 import miku.tasks.Task;
 import miku.tasks.TaskList;
 import miku.tasks.TodoTask;
@@ -110,6 +111,9 @@ public class SaveDataManager {
                 case 'E':
                     task = new EventTask(parts[2], DateTimeParser.parse(parts[3]),
                             DateTimeParser.parse(parts[4]), parts[1].charAt(0) == '1');
+                    break;
+                case 'F':
+                    task = new FixedDurationTask(parts[2], parts[3], parts[1].charAt(0) == '1');
                     break;
                 default:
                     // if we reach the default case, something is wrong, and we need to clean the file

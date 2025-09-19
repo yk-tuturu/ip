@@ -35,6 +35,8 @@ public class MikuBot {
 
         try {
             saveData.init();
+            saveData.populateTasks(taskList);
+            System.out.println("init success");
         } catch (FileIoError e) {
             ui.print(e.getMessage());
         }
