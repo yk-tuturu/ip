@@ -1,10 +1,8 @@
-# miku.MikuBot User Guide
+# MikuBot User Guide
 
-// Update the title above to match the actual product name
+![Product Screenshot](Ui.png)
 
-// Product screenshot goes here
-
-// Product intro goes here
+### Welcome to MikuBot! Chat with the miku and let miku manage your tasks for you!
 
 ## Adding deadlines
 

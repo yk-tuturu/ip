@@ -13,6 +13,9 @@ public class TodoTest {
         bot.clearSave();
 
         String output = bot.runCommand("todo task");
+
+        System.out.println(bot.runCommand("list"));
+
         assertEquals("Miku has added this task to your list!\n"
                 + "    [T][ ] task\n"
                 + "You now have 1 task in your list", output);
@@ -24,6 +27,7 @@ public class TodoTest {
         bot.clearSave();
 
         String output = bot.runCommand("todo");
+
         assertEquals("Miku cannot add an empty task!\n"
                         + Constants.INDENT
                         + "Usage: todo <task>", output);
