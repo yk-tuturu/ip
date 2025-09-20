@@ -23,6 +23,7 @@ public class Gui extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setMiku(mikuBot); // inject the Duke instance
+            stage.setTitle("MikuBot");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
