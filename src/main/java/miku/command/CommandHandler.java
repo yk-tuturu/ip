@@ -28,6 +28,13 @@ public class CommandHandler {
         commandMap.put("delete", new DeleteTaskCommand());
         commandMap.put("find", new FindCommand());
         commandMap.put("duration", new FixedDurationTaskCommand());
+
+        //easter eggs
+        commandMap.put("miku", new MikuCommand());
+        commandMap.put("sekai", new SekaiCommand());
+        commandMap.put("rolling", new RollingCommand());
+        commandMap.put("disappearance", new DisappearanceCommand());
+        commandMap.put("disappear", new DisappearanceCommand());
     }
 
     /**
