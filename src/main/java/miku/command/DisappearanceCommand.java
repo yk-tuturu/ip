@@ -6,6 +6,9 @@ import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.ui.UiHandler;
 
+/**
+ * easter egg command. also exits the program
+ */
 public class DisappearanceCommand extends Command {
     public DisappearanceCommand() {
         super("miku", "miku", true);

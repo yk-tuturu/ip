@@ -6,6 +6,9 @@ import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.ui.UiHandler;
 
+/**
+ * easter egg command
+ */
 public class RollingCommand extends Command {
     public RollingCommand() {
         super("rolling", "rolling");

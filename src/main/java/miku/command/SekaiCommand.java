@@ -2,11 +2,13 @@ package miku.command;
 
 import java.util.Map;
 
-import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
 import miku.tasks.TaskList;
 import miku.ui.UiHandler;
 
+/**
+ * easter egg command
+ */
 public class SekaiCommand extends Command {
     public SekaiCommand() {
         super("sekai", "sekai");
