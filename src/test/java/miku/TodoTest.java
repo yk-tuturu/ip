@@ -12,9 +12,11 @@ public class TodoTest {
         MikuBot bot = new MikuBot();
         bot.clearSave();
 
+        System.out.println(bot.runCommand("list"));
+
         String output = bot.runCommand("todo task");
 
-        System.out.println(bot.runCommand("list"));
+
 
         assertEquals("Miku has added this task to your list!\n"
                 + "    [T][ ] task\n"

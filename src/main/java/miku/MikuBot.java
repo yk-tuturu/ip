@@ -47,6 +47,7 @@ public class MikuBot {
      */
     public void clearSave() {
         saveData.clearSave();
+        taskList.clear();
     }
 
     /**

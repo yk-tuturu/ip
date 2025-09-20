@@ -75,4 +75,8 @@ public class TaskList {
         Task task = taskList.remove(index);
         return task;
     }
+
+    public void clear() {
+        taskList = new ArrayList<>();
+    }
 }
