@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Locale;
 
+import miku.exceptions.BadDateException;
 import miku.exceptions.IllegalCommandException;
 
 /**
@@ -20,16 +21,16 @@ import miku.exceptions.IllegalCommandException;
 public class DateTimeParser {
     private static final DateTimeFormatter FLEXIBLE_FORMATTER =
             new DateTimeFormatterBuilder()
-                    // Day / Month / Year patterns
-                    .appendPattern("[d/M/uuuu][uuuu-MM-dd][uuuu/MM/dd][d-M-uuuu][uuuu/M/d]")
-                    .optionalStart()
-                    .appendLiteral(' ')
-                    // Time patterns
-                    .appendPattern("[HHmm][HH:mm][h:mma]")
-                    .optionalEnd()
+                    .parseCaseInsensitive() // Accept "am"/"pm" lowercase
+                    .appendOptional(DateTimeFormatter.ofPattern("d/M/uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("uuuu-MM-dd[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("uuuu/MM/dd[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("d-M-uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("uuuu/M/d[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("MMM d uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("MMMM d uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
                     .toFormatter(Locale.ENGLISH)
                     .withResolverStyle(ResolverStyle.SMART);
-
     /**
      * Parses a string into a {@link LocalDateTime}.
      * <p>
@@ -38,9 +39,9 @@ public class DateTimeParser {
      *
      * @param input the date/time string to parse (required)
      * @return the parsed LocalDateTime
-     * @throws IllegalCommandException if parsing fails
+     * @throws BadDateException if parsing fails
      */
-    public static LocalDateTime parse(String input) throws IllegalCommandException {
+    public static LocalDateTime parse(String input) throws BadDateException {
         try {
             return LocalDateTime.parse(input, FLEXIBLE_FORMATTER);
         } catch (DateTimeParseException e) {
@@ -50,7 +51,7 @@ public class DateTimeParser {
                 return date.atStartOfDay();
             } catch (DateTimeParseException e2) {
                 // If both fail, throw a clear exception
-                throw new IllegalCommandException("Date parsing failed :(");
+                throw new BadDateException(input);
             }
         }
     }
@@ -65,5 +66,28 @@ public class DateTimeParser {
         String formatted = time.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma"));
 
         return formatted.replaceAll("AM", "am").replaceAll("PM", "pm");
+    }
+
+    /**
+     * Turns a datetime object into a string in iso format, for saving
+     * @param time the LocalDateTime object
+     * @return a date string
+     */
+    public static String getIsoDate(LocalDateTime time) {
+        return time.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    }
+
+    /**
+     * Turns a saved string in iso format back into a datetime object
+     * @param saved the savestring
+     * @return a LocalDateTime object
+     */
+    public static LocalDateTime parseIsoDate(String saved) throws BadDateException {
+        try {
+            return LocalDateTime.parse(saved, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        } catch (DateTimeParseException e) {
+            throw new BadDateException(saved);
+        }
+
     }
 }

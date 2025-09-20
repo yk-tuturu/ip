@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
+import miku.exceptions.BadDateException;
 import miku.exceptions.FileIoError;
 import miku.exceptions.IllegalCommandException;
 import miku.tasks.DeadlineTask;
@@ -106,17 +107,18 @@ public class SaveDataManager {
                     task = new TodoTask(parts[2], parts[1].charAt(0) == '1');
                     break;
                 case 'D':
-                    task = new DeadlineTask(parts[2], DateTimeParser.parse(parts[3]), parts[1].charAt(0) == '1');
+                    task = new DeadlineTask(parts[2], DateTimeParser.parseIsoDate(parts[3]), parts[1].charAt(0) == '1');
                     break;
                 case 'E':
-                    task = new EventTask(parts[2], DateTimeParser.parse(parts[3]),
-                            DateTimeParser.parse(parts[4]), parts[1].charAt(0) == '1');
+                    task = new EventTask(parts[2], DateTimeParser.parseIsoDate(parts[3]),
+                            DateTimeParser.parseIsoDate(parts[4]), parts[1].charAt(0) == '1');
                     break;
                 case 'F':
                     task = new FixedDurationTask(parts[2], parts[3], parts[1].charAt(0) == '1');
                     break;
                 default:
                     // if we reach the default case, something is wrong, and we need to clean the file
+                    System.out.println("error parsing task");
                     needClean = true;
                 }
 
@@ -124,7 +126,8 @@ public class SaveDataManager {
                     list.add(task);
                 }
 
-            } catch (IndexOutOfBoundsException | IllegalCommandException e) {
+            } catch (IndexOutOfBoundsException | BadDateException e) {
+                System.out.println(e);
                 needClean = true;
             }
         }
@@ -132,6 +135,7 @@ public class SaveDataManager {
         // cleans by basically rewriting the save file to only contain valid saved tasks
         if (needClean) {
             writeListToFile(list);
+            System.out.println("save file has been cleaned");
         }
     }
 

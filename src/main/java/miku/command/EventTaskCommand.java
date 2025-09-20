@@ -3,6 +3,7 @@ package miku.command;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import miku.exceptions.BadDateException;
 import miku.exceptions.FileIoError;
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
@@ -66,8 +67,8 @@ public class EventTaskCommand extends Command {
         try {
             from = DateTimeParser.parse(arg.get("from"));
             to = DateTimeParser.parse(arg.get("to"));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalCommandException("Date must be formatted correctly!");
+        } catch (BadDateException e) {
+            throw new IllegalCommandException(e.getMessage());
         }
 
         Task task = new EventTask(arg.get("default"), from, to);

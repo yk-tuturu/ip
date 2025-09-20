@@ -49,6 +49,6 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getSaveString() {
-        return "D|" + super.getSaveString() + "|" + DateTimeParser.getDateString(deadline);
+        return "D|" + super.getSaveString() + "|" + DateTimeParser.getIsoDate(deadline);
     }
 }

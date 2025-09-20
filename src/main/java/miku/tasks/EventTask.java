@@ -57,8 +57,8 @@ public class EventTask extends Task {
      */
     @Override
     public String getSaveString() {
-        String fromString = DateTimeParser.getDateString(from);
-        String toString = DateTimeParser.getDateString(to);
+        String fromString = DateTimeParser.getIsoDate(from);
+        String toString = DateTimeParser.getIsoDate(to);
         return "E|" + super.getSaveString() + "|" + fromString + "|" + toString;
     }
 

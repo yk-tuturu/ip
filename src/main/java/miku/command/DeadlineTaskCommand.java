@@ -3,6 +3,7 @@ package miku.command;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import miku.exceptions.BadDateException;
 import miku.exceptions.FileIoError;
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
@@ -48,8 +49,8 @@ public class DeadlineTaskCommand extends Command {
         LocalDateTime date;
         try {
             date = DateTimeParser.parse(dateString);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalCommandException("Date must be formatted correctly!");
+        } catch (BadDateException e) {
+            throw new IllegalCommandException(e.getMessage());
         }
 
         Task task = new DeadlineTask(arg.get("default"), date);
