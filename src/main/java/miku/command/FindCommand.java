@@ -57,7 +57,7 @@ public class FindCommand extends Command {
         for (int i = 0; i < matchingTasks.size(); i++) {
             Task task = matchingTasks.get(i);
 
-            sb.append(i + ". ").append(task.toString()).append("\n");
+            sb.append((i + 1) + ". ").append(task.toString()).append("\n");
         }
 
         return sb.toString();

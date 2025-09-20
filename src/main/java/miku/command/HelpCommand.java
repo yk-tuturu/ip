@@ -27,8 +27,8 @@ public class HelpCommand extends Command {
      */
     @Override
     public String run(Map<String, String> arg, TaskList tasks, SaveDataManager saveData, UiHandler ui) {
-        String output = "hello: say hello to miku.MikuBot!\n"
-                + "bye: say goodbye to miku.MikuBot :(\n"
+        String output = "hello: say hello to MikuBot!\n"
+                + "bye: say goodbye to MikuBot :(\n"
                 + "help: shows this command\n"
                 + "todo <task>: adds a todo task to your task list\n"
                 + "deadline <task> /by <time>: adds a deadline task to your task list\n"
