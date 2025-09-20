@@ -33,33 +33,14 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/teto.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mikuPfp.png"));
+    private Image bgImage = new Image(this.getClass().getResourceAsStream("/images/bg.png"));
 
     @FXML
     public void initialize() {
-
+        if (bgImage == null) {
+            System.out.println("backgroudn is null");
+        }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
-
-        // Load background image from resources
-        Image bgImage = new Image(
-                this.getClass().getResourceAsStream("/images/bg.jpg")
-        );
-
-        // Create BackgroundImage
-        BackgroundImage backgroundImage = new BackgroundImage(
-                bgImage,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(
-                        BackgroundSize.AUTO,
-                        BackgroundSize.AUTO,
-                        false,
-                        false,
-                        true,   // cover width
-                        true    // cover height
-                )
-        );
     }
 
     /** Injects the Duke instance */

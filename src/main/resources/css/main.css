@@ -1,5 +1,10 @@
 .root {
-    main-color: rgb(237, 255, 242);       /* Create a looked-up color called "main-color" within root. */
+
+}
+
+.root-pane {
+    -fx-background-image: url("../images/stars.jpg");
+    -fx-background-size: cover;
 }
 
 .text-field {
@@ -13,12 +18,12 @@
 }
 
 .button:hover {
-    -fx-background-color:3999a8;
+    -fx-background-color: #449eb5;
     -fx-font-size: 16px;
 }
 
 .button:pressed {
-    -fx-background-color:orange;
+    -fx-background-color: #449eb5;
     -fx-font-size: 20px;
 }
 
@@ -28,12 +33,13 @@
 }
 
 .scroll-bar {
+    -fx-background-color:  #b9daf7;
     -fx-font-size: 10px;  /* Change width of scroll bar. */
-    -fx-background-color: main-color;
+
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #ff9cb4;
+    -fx-background-color: #1562a5;
     -fx-background-radius: 1em;
 }
 
