@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
                 displayPicture.getFitWidth(),
                 displayPicture.getFitHeight()
         );
-        clip.setArcWidth(70);  // horizontal roundness
+        clip.setArcWidth(70); // horizontal roundness
         clip.setArcHeight(70); // vertical roundness
         displayPicture.setClip(clip);
     }

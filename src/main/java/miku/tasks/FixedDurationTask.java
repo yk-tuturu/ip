@@ -1,14 +1,27 @@
 package miku.tasks;
 
-import miku.util.DateTimeParser;
-
+/**
+ * Task that needs to take place within a duration, but no start or end date
+ */
 public class FixedDurationTask extends Task {
     private String duration;
+
+    /**
+     * creates a new durational task
+     * @param value
+     * @param duration
+     */
     public FixedDurationTask(String value, String duration) {
         super(value);
         this.duration = duration;
     }
 
+    /**
+     * Constructor that takes in a boolean for whether the task is done
+     * @param value
+     * @param duration
+     * @param done
+     */
     public FixedDurationTask(String value, String duration, boolean done) {
         super(value, done);
         this.duration = duration;
@@ -34,6 +47,10 @@ public class FixedDurationTask extends Task {
         return "F|" + super.getSaveString() + "|" + duration;
     }
 
+    /**
+     * Getter for the duration
+     * @return
+     */
     public String getDuration() {
         return duration;
     }

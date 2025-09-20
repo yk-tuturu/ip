@@ -1,19 +1,19 @@
 package miku.command;
 
-import java.time.LocalDateTime;
 import java.util.Map;
 
 import miku.exceptions.FileIoError;
 import miku.exceptions.IllegalCommandException;
 import miku.storage.SaveDataManager;
-import miku.tasks.DeadlineTask;
 import miku.tasks.FixedDurationTask;
 import miku.tasks.Task;
 import miku.tasks.TaskList;
 import miku.ui.UiHandler;
 import miku.util.Constants;
-import miku.util.DateTimeParser;
 
+/**
+ * A task that needs to be done in a certain duration
+ */
 public class FixedDurationTaskCommand extends Command {
     public FixedDurationTaskCommand() {
         super("duration", "duration <task> /in <time>");
