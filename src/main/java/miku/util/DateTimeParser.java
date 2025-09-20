@@ -9,7 +9,6 @@ import java.time.format.ResolverStyle;
 import java.util.Locale;
 
 import miku.exceptions.BadDateException;
-import miku.exceptions.IllegalCommandException;
 
 /**
  * Utility class for parsing and formatting dates and times.
@@ -22,13 +21,20 @@ public class DateTimeParser {
     private static final DateTimeFormatter FLEXIBLE_FORMATTER =
             new DateTimeFormatterBuilder()
                     .parseCaseInsensitive() // Accept "am"/"pm" lowercase
-                    .appendOptional(DateTimeFormatter.ofPattern("d/M/uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
-                    .appendOptional(DateTimeFormatter.ofPattern("uuuu-MM-dd[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
-                    .appendOptional(DateTimeFormatter.ofPattern("uuuu/MM/dd[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
-                    .appendOptional(DateTimeFormatter.ofPattern("d-M-uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
-                    .appendOptional(DateTimeFormatter.ofPattern("uuuu/M/d[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
-                    .appendOptional(DateTimeFormatter.ofPattern("MMM d uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
-                    .appendOptional(DateTimeFormatter.ofPattern("MMMM d uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]", Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("d/M/uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]",
+                            Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("uuuu-MM-dd[ HHmm][ HH:mm][ h:mma][ h:mm a]",
+                            Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("uuuu/MM/dd[ HHmm][ HH:mm][ h:mma][ h:mm a]",
+                            Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("d-M-uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]",
+                            Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("uuuu/M/d[ HHmm][ HH:mm][ h:mma][ h:mm a]",
+                            Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("MMM d uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]",
+                            Locale.ENGLISH))
+                    .appendOptional(DateTimeFormatter.ofPattern("MMMM d uuuu[ HHmm][ HH:mm][ h:mma][ h:mm a]",
+                            Locale.ENGLISH))
                     .toFormatter(Locale.ENGLISH)
                     .withResolverStyle(ResolverStyle.SMART);
     /**

@@ -8,7 +8,6 @@ import java.util.List;
 
 import miku.exceptions.BadDateException;
 import miku.exceptions.FileIoError;
-import miku.exceptions.IllegalCommandException;
 import miku.tasks.DeadlineTask;
 import miku.tasks.EventTask;
 import miku.tasks.FixedDurationTask;

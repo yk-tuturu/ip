@@ -16,7 +16,7 @@ import miku.util.Constants;
  */
 public class FixedDurationTaskCommand extends Command {
     public FixedDurationTaskCommand() {
-        super("duration", "duration <task> /in <time>");
+        super("duration", "duration <task> /in <duration>");
     }
 
     /**
